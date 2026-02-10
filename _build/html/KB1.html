@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="HDR Image Generation DMA (KB3)" href="KB3.html" />
+    <link rel="next" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" href="KB3.html" />
     <link rel="prev" title="Whiznium CV Demonstrator (KB0)" href="KB0.html" /> 
 </head>
 
@@ -78,6 +78,30 @@
              
   <section id="stepper-motor-control-kb1">
 <h1>Stepper Motor Control (KB1)<a class="headerlink" href="#stepper-motor-control-kb1" title="Permalink to this heading"></a></h1>
+<p><em>Highlights the basic use of FPGA design sub-modules as virtual controllers.</em></p>
+<p><em>Categories: WhizniumDBE, Whiznium CV Demonstrator</em></p>
+<p><em>Published: February 11, 2026</em></p>
+<p>Model and source code file pointers: in [1] _mdl/IexWdbeCsx_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd</p>
+<p>Generating stepper motor pulses of correct period and duty cycle for a turntable positioning task is well-suited for programmable logic, whereas information on the required target angle typically is present in the processing system, either due to algorithmic requirements or from manual UI intervention. Hence, this is a typical example of fabric-based real-time execution with high-level CPU-based control.</p>
+<p>The WhizniumDBE implementation starts with declaring the <em>rotary</em> RTL module a virtual <em>controller</em> and then associating commands with it. On the lowest level, this single definition results in matching CPU- and FPGA-side code artefacts to trigger and receive corresponding command invocations, as can be seen in Figure 7. Furthermore, Whiznium can generate interactive terminals for debug purposes, either as standalone command-line executable or as integrated web UI feature, shown on the bottom left of Figure 10.</p>
+<p><img alt="image1.png" src="_images/image1.png" /></p>
+<p><em>Figure 1a: IexWdbeCsx model file for rotary controller</em></p>
+<p><img alt="image2.png" src="_images/image2.png" /></p>
+<p><em>Figure 1b: Resulting method in CPU host library</em></p>
+<p><img alt="image3.png" src="_images/image3.png" /></p>
+<p><em>Figure 1c: Resulting method in RTL project</em></p>
+<p>On each command invocation, encoding into byte code, AXIlite communication and decoding on the PL-side are handled in auto-generated code. The byte code format is detailed in Figure 8.</p>
+<p><img alt="image4.png" src="_images/image4.png" /></p>
+<p><em>Figure 8a: Interface agnostic, CRC-guarded bytecode for CPU-FPGA command invocation</em></p>
+<p><img alt="image5.png" src="_images/image5.png" /></p>
+<p><em>Figure 8b: CPU-FPGA interaction for buffer transfer</em></p>
+<p><img alt="image6.png" src="_images/image6.png" /></p>
+<p><em>Figure 8c: Legend</em></p>
+<p>[Extra: dbeaxilite Linux kernel module]{.underline}</p>
+<p>The communication protocol outlined above is interface-agnostic which makes it viable for standalone FPGA’s besides FPGA-SoC’s. The host interface RTL module template hostif_Easy_v1_0 currently is implemented for UART, SPI and AXI4-Lite. Linux host-side for the former two, mainline kernel modules exist which make the FPGA subsystem available for standard read()/write() at familiar paths such as /dev/ttyUSB0 or /dev/spidev0.0, respectively.</p>
+<p>For the AXI4-Lite variant, a dedicated out-of-tree character device driver, dbeaxilite, is provided with WhizniumDBE. It is compatible with 32-bit and 64-bit processors (the full data width of which it uses) and in standard mode only takes up four consecutive addresses in the global address space for establishing basic framing of the communication protocol transactions. For highest throughput, two ioctl()’s, … and … are implemented, they help slash the number of system calls from multiple read()/write()’s per transaction to one. This is exemplified in … . A typical device tree snippet is shown in Figure xxx.</p>
+<p>The implementation of dbeaxilite largely avoids dynamic memory allocation with the exception of large buffer transfers (not used in the scope of stepper motor control).</p>
+<p>A second, experimental, RTL module template hostifmm_Easy_v1_0 is provided for more classical memory-mapped interaction between host and FPGA subsystem, it requires the xxx flag to be specified in the device tree.</p>
 </section>
 
 
@@ -85,7 +109,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="KB0.html" class="btn btn-neutral float-left" title="Whiznium CV Demonstrator (KB0)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="KB3.html" class="btn btn-neutral float-right" title="HDR Image Generation DMA (KB3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="KB3.html" class="btn btn-neutral float-right" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
