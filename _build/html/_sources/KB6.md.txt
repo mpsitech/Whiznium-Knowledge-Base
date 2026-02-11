@@ -1,13 +1,13 @@
 AMD MPSoC variant (KB6)
 =======================
 
-*Categories: Whiznium CV demonstrator, FPGA vendors*
-
 *Published: February 11, 2026*
+
+*Categories: Whiznium CV demonstrator, FPGA vendors*
 
 *Spotlight on: platform-specifics and build instructions for Avnet\'s ZUBoard*
 
-**Overview**
+Overview
 
 The ZUBoard, featuring the AMD's lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (\< USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.
 
@@ -15,7 +15,7 @@ Syzcam2 adapter PCB for 4+1 MIPI lanes routed as differential pairs, level shift
 
 Syzpmod2 adapter PCB for 2x8 GPIO's ... connecting to skpph2 with power supply to the stepper motor only, the ZUBoard is powered via USB-C
 
-**Quick start**
+Quick start
 
 The SD card .wic image is available at ...
 
@@ -43,9 +43,9 @@ Whereas for the latter, this command line shows
 
 And in addition, an internal web server is started such that control over the device can be achieved interactively by browsing the address
 
-[[http://192.168.1.99:13100]{.underline}](http://192.168.1.99:13100/)
+<b><u>[http://192.168.1.99:13100</u></b>](http://192.168.1.99:13100/)
 
-**Gateware**
+Gateware
 
 The Vsp\_core's key features of
 
@@ -65,7 +65,7 @@ Resource utilization is shown in Figure XXX.
 
 Memory map ... DDR memory only?
 
-**Bring-up from sources**
+Bring-up from sources
 
 Two separate Vivado 2024.2 projects are available online, one for the Vision Processor IP core vsp\_core and one for the top-level project embedding it wskd. Bitstream generation is straightforward.
 

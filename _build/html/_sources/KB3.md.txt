@@ -1,9 +1,10 @@
 FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)
 ============================================================================
 
+*Published: February 11, 2026*
+
 *Highest-bandwidth and platform-specific implications.*
 
-*Published: February 11, 2026*
 
 Model and source code file pointers: in \[1\] \_mdl/IexWdbeMdl\_wskd.xlsx, fpgawskd/{dcvsp, tivsp, zuvsp}/{Hdreng, Ddrif}.vhd; in \[2\] wzskcmbd/gbl/JobWzskAcqHdr.{h, cpp}
 
@@ -15,11 +16,11 @@ In this context, the flexibility provided by the *ddrmux\_Easy\_v1\_0* (DDR memo
 
 Regarding the shared memory space, management of active slots of the 12-item buffer is done CPU-side. For this purpose, the *JobWzskAcqHdr* job periodically invokes the *assign()* command of the RTL module *hdreng* to let it know which slot to write to *next*. As one full HDR acquisition takes at least 5x 33 ms = 167 ms, the timing of this assignment, performed in the *runHdr()* thread is not very critical. In other projects on similar platforms, successful scheduling of this type was achieved with \< 100 µs latency using standard Linux. In analogy to Example II, results can be locked by super-jobs of *JobWzskAcqHdr* for CPU-side processing. This feature is used for storing snapshot .RGBE files to SD card via *PnlWzskHwcConfig*. Templated WhizniumSBE *capabilities* assist in attaching a managed file archive to the project, providing auto-generated code for meta-data storage in the project's SQLite database and web UI file download.
 
-[Algorithm details]{.underline}
+<b><u>Algorithm details</u></b>
 
 The configuration of director (camif?) results in a change of exposure time with overlap depicted in Figure ... . The 32 bit HDRE format shares an exponent for all color channels. It can be displayed ...
 
-[Extra: dbeaxishmem Linux kernel module]{.underline}
+<b><u>Extra: dbeaxishmem Linux kernel module</u></b>
 
 Care has to be taken that the memory section shared between Linux and the FPGA subsystem is declared as reserved-memory in the device tree (example snippet shown in Figure xxx) so it is excluded from both the kernel's global memory pool and the supervision of the cache controller.
 
