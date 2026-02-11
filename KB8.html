@@ -77,12 +77,13 @@
              
   <section id="microchip-polarfire-soc-variant-kb8">
 <h1>Microchip PolarFire SoC variant (KB8)<a class="headerlink" href="#microchip-polarfire-soc-variant-kb8" title="Permalink to this heading"></a></h1>
+<p><em>Published: February 11, 2026</em></p>
 <p><em>Spotlight on: platform-specifics and build instructions for Microchip’s MPFS Disco kit</em></p>
-<p><strong>Overview</strong></p>
+<p>Overview</p>
 <p>The ZUBoard, featuring the AMD’s lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (&lt; USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.</p>
 <p>Syzcam2 adapter PCB for 4+1 MIPI lanes routed as differential pairs, level shifters for I2C</p>
 <p>Syzpmod2 adapter PCB for 2x8 GPIO’s … connecting to skpph2 with power supply to the stepper motor only, the ZUBoard is powered via USB-C</p>
-<p><strong>Quick start</strong></p>
+<p>Quick start</p>
 <p>The SD card .wic image is available at …</p>
 <p>It can be flashed to a microSD card using</p>
 <p>umount /dev/sda*</p>
@@ -96,8 +97,8 @@
 <p>For the former, typical output looks like this</p>
 <p>Whereas for the latter, this command line shows</p>
 <p>And in addition, an internal web server is started such that control over the device can be achieved interactively by browsing the address</p>
-<p><a class="reference external" href="http://192.168.1.99:13100/">[http://192.168.1.99:13100]{.underline}</a></p>
-<p><strong>Gateware</strong></p>
+<p><b><u><a class="reference external" href="http://192.168.1.99:13100/">http://192.168.1.99:13100</u></b></a></p>
+<p>Gateware</p>
 <p>The Vsp_core’s key features of</p>
 <p>Camif: instantiates AMD MIPI CSI-2 Receiver Subsystem (cf. PG232) configured to 4+1 MIPI lanes with 1188 Mbps. This allows the IMX335 to deliver its native resolution of 2592 x 1944 pixels at 30 fps. Direct application of 200 MHz clock as restored pixel data clock with the IP core’s AXI-4 Stream output filtered to only consider RAW12 data type. Data of two adjacent pixels (24-bit words) is delivered towards videoin on each clock cycle</p>
 <p>Videoin: delivers one RGB/grayscale value every other clock cycle at 1296 x 972 resolution</p>
@@ -106,7 +107,7 @@
 <p>Hostif: the PS-PL AXI-4 Lite interconnect is 64 bits wide which is also the bus width for all connected buffers to be read from the host</p>
 <p>A straightforward block design, shown in Figure XXX, has been put together in Vivado 2024.2. Visible are the discrete vsp_core I/O’s promoted to top level, the PS-PL connection HPM0 which uses AXI4-Lite for core control from the CPU (base address 0x20_0000_0000) and the PL-PS connection HPS0 which allows the core to access the 256 MB:128 MB:384 MB section of the ZUBoard’s 1 GB DDR memory. No RTL sources are required for the top-level design in addition to the auto-maintained HDL wrapper provided by Vivado.</p>
 <p>Resource utilization is shown in Figure XXX.</p>
-<p><strong>Bring-up from sources</strong></p>
+<p>Bring-up from sources</p>
 <p>Two separate Vivado 2024.2 projects are available online, one for the Vision Processor IP core vsp_core and one for the top-level project embedding it wskd. Bitstream generation is straightforward.</p>
 <p>… https://content.mpsitech.cloud/kb6/wskd1.0.3/wskd.tgz, vsp_core.tgz</p>
 <p>As for the PetaLinux 2024.2 project (PetaLinux being a wrapper for Yocto … / Bitbake … in this case), the relevant configuration can be found at</p>
