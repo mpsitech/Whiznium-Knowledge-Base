@@ -1,16 +1,17 @@
 IP cores for vendor-agnostic design probing (KB4)
 =================================================
 
+*Published: February 11, 2026*
+
 *Vendor-neutrality applied for system debugging, from design to .vcd trace display.*
 
-*Published: February 11, 2026*
 
 Model and source code file pointers: in \[1\] \_mdl/IexWdbeMdl\_wskd.xlsx, fpgawskd/zuvsp/Memtrack.vhd; in \[2\] wzskcmbd/gbl/JobWzskAcqMemtrack.{h/cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcDebug.{h/cpp}
 
 The fourth and final example covers the use of Whiznium for a topic that oftentimes implies unnecessary vendor lock-in: live probing of an FPGA design. The module templates *gptrack\_Easy\_v1\_0* (general purpose signals) and *fsmtrack\_Easy\_v1\_0* (FSM states) serve this purpose. 
 
 
-![image1.png](KB4/image1.png)
+<img src="KB4/image1.png" alt="image1.png" height="281">
 
 *Figure 1: GTKWave displaying AXI4 full handshake signals for DDR memory write-then-read at each end-of-line of Example III*
 
