@@ -1,7 +1,7 @@
 AMD MPSoC variant (KB6)
 =======================
 
-*Published: February 11, 2026*
+*Published: February 12, 2026*
 
 *Categories: Whiznium CV demonstrator, FPGA vendors*
 

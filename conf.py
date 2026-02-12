@@ -17,9 +17,9 @@ extensions = ['myst_parser', 'sphinx_rtd_theme']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', '_staging', 'Thumbs.db', '.DS_Store',
-										'KB2.md', 'KB4.md', 'KB5.md', 'KB9.md',
+										'KB5.md', 'KB9.md',
 										'KB10.md', 'KB11.md', 'KB12.md', 'KB13.md', 'KB14.md', 'KB15.md', 'KB16.md', 'KB17.md', 'KB18.md', 'KB19.md',
-										'KB20.md', 'KB21.md']
+										'KB21.md']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

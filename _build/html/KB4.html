@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whiznium CV Demonstrator (KB0) &mdash; The Whiznium Knowledge Base  documentation</title>
+  <title>IP cores for vendor-agnostic design probing (KB4) &mdash; The Whiznium Knowledge Base  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=43b6ff34" />
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stepper Motor Control (KB1)" href="KB1.html" />
-    <link rel="prev" title="Welcome to the Whiznium Knowledge Base" href="index.html" /> 
+    <link rel="next" title="AMD MPSoC variant (KB6)" href="KB6.html" />
+    <link rel="prev" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" href="KB3.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,11 +44,11 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Whiznium CV Demonstrator (KB0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB2.html">Pipelined Corner Detection Algorithm (KB2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vendor-Agnostic Design Probing (KB4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
@@ -69,9 +69,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Whiznium CV Demonstrator (KB0)</li>
+      <li class="breadcrumb-item active">IP cores for vendor-agnostic design probing (KB4)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/KB0.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/KB4.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,16 +79,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="whiznium-cv-demonstrator-kb0">
-<h1>Whiznium CV Demonstrator (KB0)<a class="headerlink" href="#whiznium-cv-demonstrator-kb0" title="Permalink to this heading"></a></h1>
+  <section id="ip-cores-for-vendor-agnostic-design-probing-kb4">
+<h1>IP cores for vendor-agnostic design probing (KB4)<a class="headerlink" href="#ip-cores-for-vendor-agnostic-design-probing-kb4" title="Permalink to this heading"></a></h1>
+<p><em>Published: February 12, 2026</em></p>
+<p><em>Vendor-neutrality applied for system debugging, from design to .vcd trace display.</em></p>
+<p>Model and source code file pointers: in [1] _mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/zuvsp/Memtrack.vhd; in [2] wzskcmbd/gbl/JobWzskAcqMemtrack.{h/cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcDebug.{h/cpp}</p>
+<p>The fourth and final example covers the use of Whiznium for a topic that oftentimes implies unnecessary vendor lock-in: live probing of an FPGA design. The module templates <em>gptrack_Easy_v1_0</em> (general purpose signals) and <em>fsmtrack_Easy_v1_0</em> (FSM states) serve this purpose.</p>
+<img src="KB4/image1.png" alt="image1.png" height="281">
+<p><em>Figure 1: GTKWave displaying AXI4 full handshake signals for DDR memory write-then-read at each end-of-line of Example III</em></p>
+<p>To track the relevant AXI4 full signals during DDR memory operations, <em>gptrack_Easy_v1_0</em> is instantiated as <em>memtrack</em>. In the module parameter section of the <em>IexWdbeMdl</em> model file entry, the capture signal clock, capture / trigger signal identifiers and the sequence buffer size are specified. Based on the vendor- and CPU-host-interface-agnostic IP core, then a customized version is generated which is accessible through commands and buffer transfers from the CPU side. A single instance captures up to 15-bit wide data with registered inputs, and it also features compressed storage for periods during which none of the signals change.</p>
+<p>As in previous examples, a pre-defined WhizniumSBE <em>capability</em> is used for buffer read-out, .vcd file generation and storage. The corresponding control panel <em>PnlWzskHwcDebug</em> is shown at the bottom right of Figure 10. It instantiates <em>JobWzskAcqMemtrack</em> as sub-job which in turn interacts with the FPGA subsystem via <em>JobWzskSrc*vsp</em> using a trigger / poll loop. Finally, Figure 11 displays a waveform captured on an AMD MPSoC system in an industry-standard tool.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to the Whiznium Knowledge Base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="KB1.html" class="btn btn-neutral float-right" title="Stepper Motor Control (KB1)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="KB3.html" class="btn btn-neutral float-left" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="KB6.html" class="btn btn-neutral float-right" title="AMD MPSoC variant (KB6)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
