@@ -1,0 +1,13 @@
+Pipelined Corner Detection Algorithm (KB2)
+==========================================
+
+*Published: February 12, 2026*
+
+*Highlights the basic use of FPGA design sub-modules as virtual controllers.*
+
+*Categories: WhizniumDBE, Whiznium CV Demonstrator*
+
+
+Model and source code file pointers: in \[1\] \_mdl/IexWdbeCsx\_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd
+
+Generating stepper motor pulses of correct period and duty cycle for a turntable positioning task is well-suited for programmable logic, whereas information on the required target angle typically is present in the processing system, either due to algorithmic requirements or from manual UI intervention. Hence, this is a typical example of fabric-based real-time execution with high-level CPU-based control.

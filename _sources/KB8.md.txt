@@ -1,7 +1,7 @@
 Microchip PolarFire SoC variant (KB8)
 =====================================
 
-*Published: February 11, 2026*
+*Published: February 12, 2026*
 
 *Spotlight on: platform-specifics and build instructions for Microchip\'s MPFS Disco kit*
 

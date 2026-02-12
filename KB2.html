@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whiznium CV Demonstrator (KB0) &mdash; The Whiznium Knowledge Base  documentation</title>
+  <title>Pipelined Corner Detection Algorithm (KB2) &mdash; The Whiznium Knowledge Base  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=43b6ff34" />
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stepper Motor Control (KB1)" href="KB1.html" />
-    <link rel="prev" title="Welcome to the Whiznium Knowledge Base" href="index.html" /> 
+    <link rel="next" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" href="KB3.html" />
+    <link rel="prev" title="Stepper Motor Control (KB1)" href="KB1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,9 +44,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Whiznium CV Demonstrator (KB0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KB2.html">Pipelined Corner Detection Algorithm (KB2)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipelined Corner Detection Algorithm (KB2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
@@ -69,9 +69,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Whiznium CV Demonstrator (KB0)</li>
+      <li class="breadcrumb-item active">Pipelined Corner Detection Algorithm (KB2)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/KB0.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/KB2.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,16 +79,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="whiznium-cv-demonstrator-kb0">
-<h1>Whiznium CV Demonstrator (KB0)<a class="headerlink" href="#whiznium-cv-demonstrator-kb0" title="Permalink to this heading"></a></h1>
+  <section id="pipelined-corner-detection-algorithm-kb2">
+<h1>Pipelined Corner Detection Algorithm (KB2)<a class="headerlink" href="#pipelined-corner-detection-algorithm-kb2" title="Permalink to this heading"></a></h1>
+<p><em>Published: February 12, 2026</em></p>
+<p><em>Highlights the basic use of FPGA design sub-modules as virtual controllers.</em></p>
+<p><em>Categories: WhizniumDBE, Whiznium CV Demonstrator</em></p>
+<p>Model and source code file pointers: in [1] _mdl/IexWdbeCsx_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd</p>
+<p>Generating stepper motor pulses of correct period and duty cycle for a turntable positioning task is well-suited for programmable logic, whereas information on the required target angle typically is present in the processing system, either due to algorithmic requirements or from manual UI intervention. Hence, this is a typical example of fabric-based real-time execution with high-level CPU-based control.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to the Whiznium Knowledge Base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="KB1.html" class="btn btn-neutral float-right" title="Stepper Motor Control (KB1)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="KB1.html" class="btn btn-neutral float-left" title="Stepper Motor Control (KB1)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="KB3.html" class="btn btn-neutral float-right" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
