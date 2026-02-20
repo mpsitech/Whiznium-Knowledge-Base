@@ -81,7 +81,7 @@
              
   <section id="fpga-based-full-frame-hdr-image-calculation-in-shared-ddr-memory-space-kb3">
 <h1>FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)<a class="headerlink" href="#fpga-based-full-frame-hdr-image-calculation-in-shared-ddr-memory-space-kb3" title="Permalink to this heading"></a></h1>
-<p><em>Published: February 12, 2026</em></p>
+<p><em>Published: February 20, 2026</em></p>
 <p><em>Highest-bandwidth and platform-specific implications.</em></p>
 <p>Model and source code file pointers: in [1] _mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/{dcvsp, tivsp, zuvsp}/{Hdreng, Ddrif}.vhd; in [2] wzskcmbd/gbl/JobWzskAcqHdr.{h, cpp}</p>
 <p>The previous examples do not show exchange of image data between CPU and FPGA subsystem at the ultimate bandwidth, which in FPGA-SoC systems is achieved by sharing a section of the system’s DDR memory space. HDR image calculation is a perfect use case for this, as already the FPGA-based HDR algorithm must load and store MB-sized intermediate results that would not fit the internal block memory of mid-range FPGA-SoC’s.</p>
