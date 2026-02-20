@@ -72,24 +72,24 @@ Put together, all aforementioned features are used to implement a tabletop 3D la
 
 <b><u>Onboarding</u></b>
 
-The primary resource for getting started with Whiznium is the repository at <b><u>[https://github.com/mpsitech/The-Whiznium-Documentation</u></b>](https://github.com/mpsitech/The-Whiznium-Documentation). After following through with the first section, "Setting Up A Whiznium Development Environment On Your Workstation", among other things, the CV demonstrator model files and source code are available for inspection locally. At the time of writing, the package wznm\_v1.1.16\_wdbe\_v1.1.51.tgz is current. It is recommended to follow the section "Setting Up WhizniumSBE and WhizniumDBE On Your Workstation" to set up a functioning Whiznium environment.
+The primary resource for getting started with Whiznium is the repository at [https://github.com/mpsitech/The-Whiznium-Documentation](https://github.com/mpsitech/The-Whiznium-Documentation). After following through with the first section, "Setting Up A Whiznium Development Environment On Your Workstation", among other things, the CV demonstrator model files and source code are available for inspection locally. At the time of writing, the package wznm\_v1.1.16\_wdbe\_v1.1.51.tgz is current. It is recommended to follow the section "Setting Up WhizniumSBE and WhizniumDBE On Your Workstation" to set up a functioning Whiznium environment.
 
 All source code repositories can also be cloned individually from these locations:
 
-\[1\] CV demonstrator RTL code and C++ access library <b><u>[https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i</u></b>]()
+\[1\] CV demonstrator RTL code and C++ access library [https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i](https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i)
 
-\[2\] CV demonstrator Linux daemon <b><u>[https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i</u></b>]()
+\[2\] CV demonstrator Linux daemon [https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i](https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i)
 
-WhizniumDBE <b><u>[https://github.com/mpsitech/wdbe-WhizniumDBE/tree/v1.1.51i</u></b>](https://github.com/mpsitech/wdbe-WhizniumDBE/tree/v1.1.51i)
+WhizniumDBE [https://github.com/mpsitech/wdbe-WhizniumDBE/tree/v1.1.51i](https://github.com/mpsitech/wdbe-WhizniumDBE/tree/v1.1.51i)
 
-WhizniumSBE <b><u>[https://github.com/mpsitech/wznm-WhizniumSBE/tree/v1.1.16i</u></b>](https://github.com/mpsitech/wznm-WhizniumSBE/tree/v1.1.16i)
+WhizniumSBE [https://github.com/mpsitech/wznm-WhizniumSBE/tree/v1.1.16i](https://github.com/mpsitech/wznm-WhizniumSBE/tree/v1.1.16i)
 
-The primary source for in-depth exploration of all aspects of the Whiznium CV demonstrator is the Whiznium Knowledge Base of which this article is the foundational document: <b><u>[https://mpsitech.github.io/Whiznium-Knowledge-Base</u></b>](https://mpsitech.github.io/Whiznium-Knowledge-Base)
+The primary source for in-depth exploration of all aspects of the Whiznium CV demonstrator is the Whiznium Knowledge Base of which this article is the foundational document: [https://mpsitech.github.io/Whiznium-Knowledge-Base](https://mpsitech.github.io/Whiznium-Knowledge-Base)
 
 For everyday work with WhizniumSBE and WhizniumDBE, their respective reference pages are an indispensable resource:
 
-<b><u>[https://mpsitech.github.io/The-WhizniumSBE-Reference</u></b>](https://mpsitech.github.io/The-WhizniumSBE-Reference)
+[https://mpsitech.github.io/The-WhizniumSBE-Reference](https://mpsitech.github.io/The-WhizniumSBE-Reference)
 
-<b><u>[https://mpsitech.github.io/The-WhizniumDBE-Reference</u></b>](https://mpsitech.github.io/The-WhizniumDBE-Reference)
+[https://mpsitech.github.io/The-WhizniumDBE-Reference](https://mpsitech.github.io/The-WhizniumDBE-Reference)
 
 Finally, MPSI Technologies provides consulting services around the efficient use of Whiznium in developer teams.

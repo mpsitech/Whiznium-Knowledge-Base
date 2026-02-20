@@ -1,7 +1,7 @@
 IP cores for vendor-agnostic design probing (KB4)
 =================================================
 
-*Published: February 12, 2026*
+*Published: February 20, 2026*
 
 *Vendor-neutrality applied for system debugging, from design to .vcd trace display.*
 
