@@ -1,7 +1,7 @@
 Stepper Motor Control (KB1)
 ===========================
 
-*Published: February 12, 2026*
+*Published: February 20, 2026*
 
 *Highlights the basic use of FPGA design sub-modules as virtual controllers.*
 
