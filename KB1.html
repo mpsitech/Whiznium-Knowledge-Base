@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -14,9 +14,9 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-      <script src="_static/doctools.js?v=888ff710"></script>
-      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -80,31 +80,43 @@
            <div itemprop="articleBody">
              
   <section id="stepper-motor-control-kb1">
-<h1>Stepper Motor Control (KB1)<a class="headerlink" href="#stepper-motor-control-kb1" title="Permalink to this heading"></a></h1>
-<p><em>Published: February 20, 2026</em></p>
+<h1>Stepper Motor Control (KB1)<a class="headerlink" href="#stepper-motor-control-kb1" title="Link to this heading"></a></h1>
+<p><em>Published: February 27, 2026</em></p>
 <p><em>Highlights the basic use of FPGA design sub-modules as virtual controllers.</em></p>
 <p><em>Categories: WhizniumDBE, Whiznium CV Demonstrator</em></p>
-<p>Model and source code file pointers: in [1] _mdl/IexWdbeCsx_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd</p>
+<p>Model and source code file pointers: in [1] _mdl/IexWdbe{Csx, Dpl}_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd, wskdterm/Wskdterm_exe.cpp; in [2] _mdl/IexWznm{Gbl, Job}_wzsk.xlsx, wzskcmbd/gbl/JobWzskSrcZuvsp.cpp, wzskcmbd/CrdWzskLlv/PnlWzskLlvTermZuvsp.cpp</p>
 <p>Generating stepper motor pulses of correct period and duty cycle for a turntable positioning task is well-suited for programmable logic, whereas information on the required target angle typically is present in the processing system, either due to algorithmic requirements or from manual UI intervention. Hence, this is a typical example of fabric-based real-time execution with high-level CPU-based control.</p>
-<p>The WhizniumDBE implementation starts with declaring the <em>rotary</em> RTL module a virtual <em>controller</em> and then associating commands with it. On the lowest level, this single definition results in matching CPU- and FPGA-side code artefacts to trigger and receive corresponding command invocations, as can be seen in Figure 7. Furthermore, Whiznium can generate interactive terminals for debug purposes, either as standalone command-line executable or as integrated web UI feature, shown on the bottom left of Figure 10.</p>
+<p>The WhizniumDBE implementation starts with declaring the <em>rotary</em> RTL module a virtual <em>controller</em> and then associating commands with it. On the lowest level, this single definition results in matching CPU- and FPGA-side code artefacts to trigger and receive corresponding command invocations, as can be seen in Figures 1a-c.</p>
 <img src="KB1/image1.png" alt="image1.png" height="636">
 <p><em>Figure 1a: IexWdbeCsx model file for rotary controller</em></p>
 <img src="KB1/image2.png" alt="image2.png" height="478">
 <p><em>Figure 1b: Resulting method in CPU host library</em></p>
 <img src="KB1/image3.png" alt="image3.png" height="582">
 <p><em>Figure 1c: Resulting method in RTL project</em></p>
-<p>On each command invocation, encoding into byte code, AXIlite communication and decoding on the PL-side are handled in auto-generated code. The byte code format is detailed in Figure 8.</p>
+<p>On each command invocation, encoding into byte code, AXI4-Lite communication and decoding on the PL-side are handled in auto-generated code. The byte code format is detailed in Figures 2a-c.</p>
 <img src="KB1/image4.png" alt="image4.png" height="173">
-<p><em>Figure 8a: Interface agnostic, CRC-guarded bytecode for CPU-FPGA command invocation</em></p>
+<p><em>Figure 2a: Interface agnostic, CRC-guarded bytecode for CPU-FPGA command invocation</em></p>
 <img src="KB1/image5.png" alt="image5.png" height="342">
-<p><em>Figure 8b: CPU-FPGA interaction for buffer transfer</em></p>
+<p><em>Figure 2b: CPU-FPGA interaction for buffer transfer</em></p>
 <img src="KB1/image6.png" alt="image6.png" height="60">
-<p><em>Figure 8c: Legend</em></p>
+<p><em>Figure 2c: Legend</em></p>
 <p><b><u>Extra: dbeaxilite Linux kernel module</u></b></p>
 <p>The communication protocol outlined above is interface-agnostic which makes it viable for standalone FPGA’s besides FPGA-SoC’s. The host interface RTL module template hostif_Easy_v1_0 currently is implemented for UART, SPI and AXI4-Lite. Linux host-side for the former two, mainline kernel modules exist which make the FPGA subsystem available for standard read()/write() at familiar paths such as /dev/ttyUSB0 or /dev/spidev0.0, respectively.</p>
-<p>For the AXI4-Lite variant, a dedicated out-of-tree character device driver, dbeaxilite, is provided with WhizniumDBE. It is compatible with 32-bit and 64-bit processors (the full data width of which it uses) and in standard mode only takes up four consecutive addresses in the global address space for establishing basic framing of the communication protocol transactions. For highest throughput, two ioctl()’s, … and … are implemented, they help slash the number of system calls from multiple read()/write()’s per transaction to one. This is exemplified in … . A typical device tree snippet is shown in Figure xxx.</p>
-<p>The implementation of dbeaxilite largely avoids dynamic memory allocation with the exception of large buffer transfers (not used in the scope of stepper motor control).</p>
-<p>A second, experimental, RTL module template hostifmm_Easy_v1_0 is provided for more classical memory-mapped interaction between host and FPGA subsystem, it requires the xxx flag to be specified in the device tree.</p>
+<p>For the AXI4-Lite variant, a dedicated out-of-tree character device driver, <em>dbeaxilite</em>, is provided with WhizniumDBE. It is compatible with 32-bit and 64-bit processors (the full data width of which it uses) and in standard mode only takes up four consecutive addresses in the global address space for establishing basic framing of the communication protocol transactions. For maximum throughput, two ioctl()’s for single vs. batch execution of commands, [<em>DBEAXILITE_IOC_RUNCMD</em> and <em>DBEAXILITE_IOC_RUNCMDS</em>, as well as one ioctl() for buffer transfers, <em>DBEAXILITE_IOC_RUNBUFXF</em>]{.mark} are implemented. They help slash the number of system calls from multiple read()/write()’s per transaction to one. This is exemplified in [1] ezdevwskd/UntWskdZuvsp/UntWskdZuvsp.cpp. A typical device tree snippet is shown in Figure 3.</p>
+<img src="KB1/image7.png" alt="image7.png" height="196">
+<p><em>Figure 3: Device tree snippet for dbeaxilite</em></p>
+<p>The implementation of dbeaxilite largely avoids dynamic memory allocation except for large buffer transfers (not used in the scope of stepper motor control).</p>
+<p>A second, experimental, RTL module template <em>aximmcohostif_Easy_v1_0</em> is provided for more classical memory-mapped interaction between host and FPGA subsystem, it requires the <em>mmapNotBus</em> flag to be specified in the device tree node.</p>
+<p><b><u>Extra: interactive terminal as standalone command-line executable</u></b></p>
+<p>The default WhizniumDBE deliverables, as specified in IexWdbeDpl_wskd, only comprise <em>ezdevwskd</em> and <em>fpgawskd</em> for CPU host library and RTL code, respectively. By adding <em>wskdterm</em> to the set, WhizniumDBE will additionally auto-generate a Linux command-line executable building on the CPU host library, which allows for the interactive execution of commands and buffer transfers on the FPGA subsystem.</p>
+<p>Figure 4: Interactive terminal trace for command invocation and buffer transfer to file</p>
+<p><b><u>Extra: interactive terminal as integrated web UI feature</u></b></p>
+<p>To take things a step further, interactive FPGA subsystem command execution in the Linux daemon’s web UI is provided if the WhizniumSBE <em>capability</em> (templated functionality for Linux daemons) <em>PnlWzskLlvTermZuvsp</em> of type <em>dbeterm</em> is specified in IexWznmGbl_wzsk. It is subsequently linked up to the web UI’s host card and the FPGA subsystem source <em>job</em> in IexWznmJob_wzsk.</p>
+<img src="KB1/image8.png" alt="image8.png" height="574">
+<p><em>Figure 5: Interactive terminal as web UI panel</em></p>
+<p>As interactive command execution is a debug-only feature, the corresponding panel is typically placed on a card that is visible to administrators only, with user access rights configured accordingly.</p>
+<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i</a></p>
+<p>[2] CV demonstrator Linux daemon <a class="reference external" href="https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i">https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i</a></p>
 </section>
 
 

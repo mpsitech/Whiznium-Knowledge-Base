@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -14,9 +14,9 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-      <script src="_static/doctools.js?v=888ff710"></script>
-      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -80,15 +80,20 @@
            <div itemprop="articleBody">
              
   <section id="ip-cores-for-vendor-agnostic-design-probing-kb4">
-<h1>IP cores for vendor-agnostic design probing (KB4)<a class="headerlink" href="#ip-cores-for-vendor-agnostic-design-probing-kb4" title="Permalink to this heading"></a></h1>
-<p><em>Published: February 20, 2026</em></p>
-<p><em>Vendor-neutrality applied for system debugging, from design to .vcd trace display.</em></p>
+<h1>IP cores for vendor-agnostic design probing (KB4)<a class="headerlink" href="#ip-cores-for-vendor-agnostic-design-probing-kb4" title="Link to this heading"></a></h1>
+<p><em>Published: February 27, 2026</em></p>
+<p><em>Highlights the [use of templates for signal-level debug outside of vendor IDE’s]{.mark}.</em></p>
 <p>Model and source code file pointers: in [1] _mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/zuvsp/Memtrack.vhd; in [2] wzskcmbd/gbl/JobWzskAcqMemtrack.{h/cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcDebug.{h/cpp}</p>
-<p>The fourth and final example covers the use of Whiznium for a topic that oftentimes implies unnecessary vendor lock-in: live probing of an FPGA design. The module templates <em>gptrack_Easy_v1_0</em> (general purpose signals) and <em>fsmtrack_Easy_v1_0</em> (FSM states) serve this purpose.</p>
+<p>This deep-dive covers the use of Whiznium for a topic that oftentimes implies unnecessary vendor lock-in: live probing of an FPGA design. The module templates <em>gptrack_Easy_v1_0</em> (general purpose signals) and <em>fsmtrack_Easy_v1_0</em> (FSM states) serve this purpose.</p>
 <img src="KB4/image1.png" alt="image1.png" height="281">
 <p><em>Figure 1: GTKWave displaying AXI4 full handshake signals for DDR memory write-then-read at each end-of-line of Example III</em></p>
 <p>To track the relevant AXI4 full signals during DDR memory operations, <em>gptrack_Easy_v1_0</em> is instantiated as <em>memtrack</em>. In the module parameter section of the <em>IexWdbeMdl</em> model file entry, the capture signal clock, capture / trigger signal identifiers and the sequence buffer size are specified. Based on the vendor- and CPU-host-interface-agnostic IP core, then a customized version is generated which is accessible through commands and buffer transfers from the CPU side. A single instance captures up to 15-bit wide data with registered inputs, and it also features compressed storage for periods during which none of the signals change.</p>
+<p><b><u>General-purpose signal tracking</u></b></p>
+<p>In the</p>
+<p><b><u>FSM state tracking</u></b></p>
+<p><b><u>CPU-side elements</u></b></p>
 <p>As in previous examples, a pre-defined WhizniumSBE <em>capability</em> is used for buffer read-out, .vcd file generation and storage. The corresponding control panel <em>PnlWzskHwcDebug</em> is shown at the bottom right of Figure 10. It instantiates <em>JobWzskAcqMemtrack</em> as sub-job which in turn interacts with the FPGA subsystem via <em>JobWzskSrc*vsp</em> using a trigger / poll loop. Finally, Figure 11 displays a waveform captured on an AMD MPSoC system in an industry-standard tool.</p>
+<p>The capability, currently limited to acquiring the track of a single module at a time, results in an interactive</p>
 </section>
 
 
