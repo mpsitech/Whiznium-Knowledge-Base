@@ -7,7 +7,12 @@ AMD MPSoC variant (KB6)
 
 *Spotlight on: platform-specifics and build instructions for Avnet\'s ZUBoard*
 
-Overview
+<b><u>Overview</u></b>
+
+<img src="KB6/wskd.png" alt="wskd.png" height="600">
+
+*Figure 1: Vivado block design*
+
 
 The ZUBoard, featuring the AMD's lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (\< USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.
 
@@ -69,10 +74,10 @@ Bring-up from sources
 
 Two separate Vivado 2024.2 projects are available online, one for the Vision Processor IP core vsp\_core and one for the top-level project embedding it wskd. Bitstream generation is straightforward.
 
-... https://content.mpsitech.cloud/kb6/wskd1.0.3/wskd.tgz, vsp\_core.tgz
+... https://content.mpsitech.cloud/kb6/wskd_v1.0.3/wskd.tgz, vsp\_core.tgz
 
 As for the PetaLinux 2024.2 project (PetaLinux being a wrapper for Yocto ... / Bitbake ... in this case), the relevant configuration can be found at
 
-... https://content.mpsitech.cloud/kb6/wskd1.0.3/project-spec.tgz
+... https://content.mpsitech.cloud/kb6/wskd_v1.0.3/project-spec.tgz
 
 It can be built and deployed in the standard way detailed in \[1\].

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -14,9 +14,9 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-      <script src="_static/doctools.js?v=888ff710"></script>
-      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -79,11 +79,11 @@
            <div itemprop="articleBody">
              
   <section id="mastering-the-job-tree-kb20">
-<h1>Mastering the Job Tree (KB20)<a class="headerlink" href="#mastering-the-job-tree-kb20" title="Permalink to this heading"></a></h1>
-<p><em>Published: February 20, 2026</em></p>
+<h1>Mastering the Job Tree (KB20)<a class="headerlink" href="#mastering-the-job-tree-kb20" title="Link to this heading"></a></h1>
+<p><em>Published: February 27, 2026</em></p>
 <p>Model and source code file pointers: in [2] _mdl/IexWznm{Job, Jtr}_wzsk.xlsx, wzskcmbd/Wzskcmbd.{h, cpp}, wzskcmbd/gbl/JobWzsk{SrcZuvsp, ActRotary}.{h, cpp}</p>
 <p>At this point, the CPU-side concept of the <em>job tree</em> should be introduced. Any Embedded System development mandates clearly defined software responsibilities for control and observation of hardware features. WhizniumSBE encourages splitting functionality into a fine-grained hierarchy of <em>jobs</em>, with each job resulting in a dedicated C++ class and source code file, exemplified for the CV demonstrator project in Figure 9. Super jobs <em>#include</em> their sub-jobs and can access their functionality directly. In addition, sophisticated thread-safe inter-job call passing is part of every WhizniumSBE-backed design.</p>
-<img src="KB20/image1.png" alt="image1.png" height="686">
+<img src="KB20/image1.png" alt="image1.png" height="836">
 <p><em>Figure 1: CV demonstrator runtime job tree (slightly shortened) with jobs relevant for examples I-IV highlighted in color; stages in gray for jobs with attached state machines</em></p>
 <p>According to the above, on the one hand each hardware-controlling job should exist only once in controlling fashion, while on the other hand there can be multiple super-jobs requiring their functionality as sub-jobs. This contradiction is resolved by instantiating each hardware-controlling job once in server mode and multiple times in client mode – this is denoted as /SRV and /CLI, respectively, in Figure 9. Only the server instance actively performs operations on hardware, for example by holding file descriptors and allocated memory while relaying requests and results to client instances.</p>
 <p>FPGA subsystem access is achieved, for the AMD MPSoC variant of the CV demonstrator, by instantiating the job <em>JobWzskSrcZuvsp</em>. It funnels all command invocations and buffer transfers through a single character device, <em>/dev/dbeaxilite0</em>. To allow mutually independent super-jobs, such as <em>JobWzskActLaser</em> for line laser control and <em>JobWzskActRotary</em> for turntable control, to gain access to only a portion of the FPGA subsystem, the concept of <em>claims</em> is implemented, along with thread-safe handling methods. With it, at any given time, exactly one super-job can claim controlling access of either of the domains <em>corner/decim/hdreng/laser/step/trace/*track</em>. In an alternative implementation, multiple WhizniumDBE-backed IP cores, one for each domain, could be attached to the system.</p>

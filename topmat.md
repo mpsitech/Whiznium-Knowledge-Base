@@ -12,7 +12,7 @@ sys: system integration across the Embedded Full Stack<br>
 |||x|||KB0 Whiznium CV Demonstrator|2026-02-24|demontstrator project and paths of exploration|
 ||x|x|||KB1 Stepper Motor Control|2026-02-24|basic use of FPGA design sub-modules as virtual controllers|
 ||x|x|||KB2 Pipelined Corner Detection Algorithm|2026-02-24|pipelined and parallel execition, a key FPGA strength|
-||x|x|||KB3 HDR Image Generation DMA|2026-02-24|handling of large chunks of data shared between PS and PL|
+||x|x|||KB3 HDR Image Generation DMA|2026-02-24|inclusion of external memory and platform-specific implications|
 |x||x|x||KB4 Vendor-Agnostic Design Probing|2026-02-24|use of templates for signal-level debug outside of vendor IDE's|
 |x||x|||<div style="color:lightgray">KB5 Daemon Command Line Debug</div>|TBD|built-in daemon features to debug job-job interaction and multi-threading|
 |||x|x||KB6 AMD MPSoC Variant|2026-02-24|platform-specifics and build instructions for Avnet's ZUBoard|
