@@ -1,12 +1,12 @@
 Whiznium CV Demonstrator (KB0)
 ==============================
 
-*Published: April 6, 2026*
+*Published: April 06, 2026*
+
 
 *Highlights demonstrator project and paths of exploration.*
 
 *Categories: WhizniumDBE, Whiznium CV Demonstrator*
-
 
 The fascinating world of Embedded System differs greatly from software-only environments in that any meaningful example for a developer tool requires a piece of hardware to showcase its features. To come up with a suitable demonstrator for Whiznium, additional requirements were identified which can be summarized as follows:
 
@@ -88,13 +88,13 @@ The primary resource for getting started with Whiznium is the repository at <htt
 
 All source code repositories can also be cloned individually from these locations:
 
-\[1\] CV demonstrator RTL code and C++ access library <https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i>
+\[1\] CV demonstrator RTL code and C++ access library <https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i>
 
-\[2\] CV demonstrator Linux daemon <https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i>
+\[2\] CV demonstrator Linux daemon <https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i>
 
 WhizniumDBE <https://github.com/mpsitech/wdbe-WhizniumDBE/tree/v1.1.51i>
 
-WhizniumSBE <https://github.com/mpsitech/wznm-WhizniumSBE/tree/v1.1.16i>
+WhizniumSBE <https://github.com/mpsitech/wznm-WhizniumSBE/tree/v1.1.19i>
 
 The primary source for in-depth exploration of all aspects of the Whiznium CV demonstrator is the Whiznium Knowledge Base of which this article is the foundational document: <https://mpsitech.github.io/Whiznium-Knowledge-Base>
 

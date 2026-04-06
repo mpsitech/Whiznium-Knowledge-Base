@@ -1,7 +1,7 @@
 Efinix Titanium variant (KB7)
 =============================
 
-*Published: April 6, 2026*
+*Published: official date pending*
 
 *Highlights the platform-specifics and build instructions for Efinix\'s Ti180 dev kit.*
 

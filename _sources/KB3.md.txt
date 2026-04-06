@@ -1,10 +1,12 @@
 FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)
 ============================================================================
 
-*Published: April 6, 2026*
+*Published: April 06, 2026*
+
 
 *Highlights external memory inclusion and platform-specific implications.*
 
+*Categories: WhizniumDBE, Whiznium CV Demonstrator*
 
 Model and source code file pointers: in \[1\] \_mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/{dcvsp, tivsp, zuvsp}/{Hdreng, Ddrif}.vhd; in \[2\] wzskcmbd/gbl/JobWzskAcqHdr.{h, cpp}
 
@@ -38,6 +40,6 @@ Care has to be taken that the memory section shared between Linux and the FPGA s
 
 To finally enable user space applications to access the reserved memory region after mmap(), the simple *dbeaxishmem* out-of-tree kernel module is provided with WhizniumDBE.
 
-\[1\] CV demonstrator RTL code and C++ access library <https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i>
+\[1\] CV demonstrator RTL code and C++ access library <https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i>
 
-\[2\] CV demonstrator Linux daemon
+\[2\] CV demonstrator Linux daemon <https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i>
