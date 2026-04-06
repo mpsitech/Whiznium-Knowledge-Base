@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipelined Corner Detection Algorithm (KB9) &mdash; The Whiznium Knowledge Base  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=43b6ff34" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mastering the Job Tree (KB20)" href="KB20.html" />
+    <link rel="prev" title="Microchip PolarFire SoC variant (KB8)" href="KB8.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            The Whiznium Knowledge Base
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB2.html">Image Decimation for Preview (KB2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipelined Corner Detection Algorithm (KB9)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB20.html">Mastering the Job Tree (KB20)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Whiznium Knowledge Base</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pipelined Corner Detection Algorithm (KB9)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/KB9.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pipelined-corner-detection-algorithm-kb9">
+<h1>Pipelined Corner Detection Algorithm (KB9)<a class="headerlink" href="#pipelined-corner-detection-algorithm-kb9" title="Link to this heading"></a></h1>
+<p><em>Published: official date pending</em></p>
+<p><em>Highlights pipelined and parallel execution, a key FPGA strength.</em></p>
+<p><em>Categories: WhizniumDBE, Whiznium CV Demonstrator</em></p>
+<p>Model and source code file pointers: in [1] _mdl/IexWdbeFin_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspCorner.h, fpgawskd/zuvsp/{Corner/Videoin}.vhd</p>
+<p>Identification of high-contrast patterns such as bar codes is one of the oldest computer vision applications there is. In the context of the Whiznium CV demonstrator, the precise determination of the turntable’s position relative of the camera is a task achieved through identifying its printed checkerboard pattern’s corners.</p>
+<p>The theory of the Harris corner detection algorithm used to this end is well-established [2] and can be summarized as accomplishing two consecutive tasks:</p>
+<p>1. identification of camera pixels with large spatial differentials towards their neighbors, looking at 5x5 windows around each pixel, then attribution of the so-called Harris score to each pixel (the higher the more pronounced)</p>
+<p>2. selecting the pixels with the maximum – then logarithmic - Harris score, first in their immediate 5x5 pixel surroundings, then by means of a threshold / cutoff across the entire camera frame</p>
+<p>The FPGA implementation of 1. roughly follows [3] and comes down to pipelining the following formula which notably features summations over two dimensions x, y or row, column.</p>
+<p>Score = …</p>
+<p>In manual analysis, first possible parallelism is identified and then matched with the known latencies of – here – adder and multiplier the is to be identified and matched with known latencies as well as required register cycles to be inserted, as visualized in Figures 1a-b. All register-to-register operations are then bundled in the FSM stateScore.</p>
+<p>Particularly the multiplier stages are not suitable for single-clock execution at fMclk = 250 MHz on the one hand, and are good candidates for vendor-specific DSP blocks on the other hand. To let the respective synthesis tools derive those macros automatically, while keeping the RTL vendor-agnostic, the WhizniumDBE module templates Add_v2_0 and Mult_2_0 are instantiated: by setting their respective ireg / oreg (input / output register) generics, latencies between 1 and 3 can be requested.</p>
+<p>It is worth noting that the pipeline can only work if pixel data from multiple, here five, rows is made available at any given clock cycle. The corresponding buffering and replay is accomplished inside Videoin.vhd, from where grayscale pixel data is streamed into Corner.vhd via grayVideoinToManyAXIS.</p>
+<img src="KB9/image1.png" alt="image1.png" height="598">
+<p><em>Figure 1a: Register-to-register pipeline for calculation of the per-pixel Harris score (1/2)</em></p>
+<img src="KB9/image2.png" alt="image2.png" height="442">
+<p><em>Figure 1b: Register-to-register pipeline for calculation of the per-pixel Harris score (2/2)</em></p>
+<p>The scope for identifying corner pixels again is a 5x5 window, to this end Harris scores (only its exponent rexp is processed further) of five rows are stored and re-streamed using the FSM stateImdstream and the five buffers imd{0..4}buf. It is then in the FSM stateMaxsel that a threshold cutoff is performed and identified corner pixels are stored by their coordinate in row16col16 format to the buffer coobuf. Coobuf in turn can be read from the CPU side for further processing.</p>
+<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i</a></p>
+<p>[2] Chris Harris, Mike Stephens: A Combined Corner and Edge Detector; Fourth Alvey Vision Conference Proceedings, Manchester 1988</p>
+<p>[3] Tak Lon Chao, Kin Hong Wong: An efficient FPGA implementation of the Harris Corner feature detector; IAPR International Conference on Machine Vision Applications, Tokyo 2015</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="KB8.html" class="btn btn-neutral float-left" title="Microchip PolarFire SoC variant (KB8)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="KB20.html" class="btn btn-neutral float-right" title="Mastering the Job Tree (KB20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, MPSI Technologies GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
