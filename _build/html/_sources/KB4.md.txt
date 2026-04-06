@@ -1,10 +1,11 @@
 IP cores for vendor-agnostic design probing (KB4)
 =================================================
 
-*Published: April 6, 2026*
+*Published: official date pending*
 
 *Highlights the [use of templates for signal-level debug outside of vendor IDE\'s]{.mark}.*
 
+*Categories: WhizniumSBE, Whiznium CV Demonstrator, FPGA Vendors*
 
 Model and source code file pointers: in \[1\] \_mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/zuvsp/Memtrack.vhd; in \[2\] wzskcmbd/gbl/JobWzskAcqMemtrack.{h/cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcDebug.{h/cpp}
 

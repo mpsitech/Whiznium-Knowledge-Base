@@ -1,12 +1,12 @@
 Stepper Motor Control (KB1)
 ===========================
 
-*Published: April 6, 2026*
+*Published: April 06, 2026*
+
 
 *Highlights the basic use of FPGA design sub-modules as virtual controllers.*
 
 *Categories: WhizniumDBE, Whiznium CV Demonstrator*
-
 
 Model and source code file pointers: in \[1\] \_mdl/IexWdbe{Csx, Dpl}\_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd, wskdterm/Wskdterm_exe.cpp; in \[2\] \_mdl/IexWznm{Gbl, Job}\_wzsk.xlsx, wzskcmbd/gbl/JobWzskSrcZuvsp.cpp, wzskcmbd/CrdWzskLlv/PnlWzskLlvTermZuvsp.cpp
 
@@ -72,20 +72,24 @@ A second, experimental, RTL module template *aximmcohostif_Easy_v1_0* is provide
 
 The default WhizniumDBE deliverables, as specified in IexWdbeDpl_wskd, only comprise *ezdevwskd* and *fpgawskd* for CPU host library and RTL code, respectively. By adding *wskdterm* to the set, WhizniumDBE will additionally auto-generate a Linux command-line executable building on the CPU host library, which allows for the interactive execution of commands and buffer transfers on the FPGA subsystem.
 
-Figure 4: Interactive terminal trace for command invocation and buffer transfer to file
+
+<img src="KB1/image8.png" alt="image8.png" height="737">
+
+*Figure 4: Interactive terminal trace for command invocation and buffer transfer to file (slightly edited for clarity)*
+
 
 <b><u>Extra: interactive terminal as integrated web UI feature</u></b>
 
 To take things a step further, interactive FPGA subsystem command execution in the Linux daemon's web UI is provided if the WhizniumSBE *capability* (templated functionality for Linux daemons) *PnlWzskLlvTermZuvsp* of type *dbeterm* is specified in IexWznmGbl_wzsk. It is subsequently linked up to the web UI's host card and the FPGA subsystem source *job* in IexWznmJob_wzsk.
 
 
-<img src="KB1/image8.png" alt="image8.png" height="574">
+<img src="KB1/image9.png" alt="image9.png" height="718">
 
 *Figure 5: Interactive terminal as web UI panel*
 
 
 As interactive command execution is a debug-only feature, the corresponding panel is typically placed on a card that is visible to administrators only, with user access rights configured accordingly.
 
-\[1\] CV demonstrator RTL code and C++ access library <https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i>
+\[1\] CV demonstrator RTL code and C++ access library <https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i>
 
-\[2\] CV demonstrator Linux daemon <https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i>
+\[2\] CV demonstrator Linux daemon <https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i>

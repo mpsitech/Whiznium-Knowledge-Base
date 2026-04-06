@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="IP cores for vendor-agnostic design probing (KB4)" href="KB4.html" />
-    <link rel="prev" title="Stepper Motor Control (KB1)" href="KB1.html" /> 
+    <link rel="prev" title="Image Decimation for Preview (KB2)" href="KB2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,13 +46,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB2.html">Image Decimation for Preview (KB2)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">HDR Image Generation DMA (KB3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB20.html">Mastering the Job Tree (KB20)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KB22.html">Whiznium Initialization (KB22)</a></li>
 </ul>
 
         </div>
@@ -81,8 +81,9 @@
              
   <section id="fpga-based-full-frame-hdr-image-calculation-in-shared-ddr-memory-space-kb3">
 <h1>FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)<a class="headerlink" href="#fpga-based-full-frame-hdr-image-calculation-in-shared-ddr-memory-space-kb3" title="Link to this heading"></a></h1>
-<p><em>Published: April 6, 2026</em></p>
+<p><em>Published: April 06, 2026</em></p>
 <p><em>Highlights external memory inclusion and platform-specific implications.</em></p>
+<p><em>Categories: WhizniumDBE, Whiznium CV Demonstrator</em></p>
 <p>Model and source code file pointers: in [1] _mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/{dcvsp, tivsp, zuvsp}/{Hdreng, Ddrif}.vhd; in [2] wzskcmbd/gbl/JobWzskAcqHdr.{h, cpp}</p>
 <p>The ultimate rate of data exchange between CPU and FPGA subsystem in an FPGA-SoC is achieved by sharing a section of the system’s DDR memory space. HDR image calculation is a perfect use case for this, as already the FPGA-based HDR algorithm must load and store MB-sized intermediate results that would not fit the internal block memory of mid-range FPGA-SoC’s.</p>
 <p>The RTL module <em>hdreng</em> handles the acquisition of five consecutive RGB frames, with each taken at one eighth the exposure time of the previous one. For 12 bits of dynamic range, this provides sufficient overlap to iteratively determine a 3x8 + 8 bit RGBE value for each pixel, where ‘E’ represents an exponent shared between the three base colors.</p>
@@ -97,15 +98,15 @@
 <img src="KB3/image2.png" alt="image2.png" height="271">
 <p><em>Figure 2: Device tree snippet for dbeaxishmem</em></p>
 <p>To finally enable user space applications to access the reserved memory region after mmap(), the simple <em>dbeaxishmem</em> out-of-tree kernel module is provided with WhizniumDBE.</p>
-<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i</a></p>
-<p>[2] CV demonstrator Linux daemon</p>
+<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i</a></p>
+<p>[2] CV demonstrator Linux daemon <a class="reference external" href="https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i">https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i</a></p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="KB1.html" class="btn btn-neutral float-left" title="Stepper Motor Control (KB1)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="KB2.html" class="btn btn-neutral float-left" title="Image Decimation for Preview (KB2)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="KB4.html" class="btn btn-neutral float-right" title="IP cores for vendor-agnostic design probing (KB4)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

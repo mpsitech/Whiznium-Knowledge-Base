@@ -46,13 +46,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB2.html">Image Decimation for Preview (KB2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vendor-Agnostic Design Probing (KB4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB20.html">Mastering the Job Tree (KB20)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KB22.html">Whiznium Initialization (KB22)</a></li>
 </ul>
 
         </div>
@@ -81,8 +81,9 @@
              
   <section id="ip-cores-for-vendor-agnostic-design-probing-kb4">
 <h1>IP cores for vendor-agnostic design probing (KB4)<a class="headerlink" href="#ip-cores-for-vendor-agnostic-design-probing-kb4" title="Link to this heading"></a></h1>
-<p><em>Published: April 6, 2026</em></p>
+<p><em>Published: official date pending</em></p>
 <p><em>Highlights the [use of templates for signal-level debug outside of vendor IDE’s]{.mark}.</em></p>
+<p><em>Categories: WhizniumSBE, Whiznium CV Demonstrator, FPGA Vendors</em></p>
 <p>Model and source code file pointers: in [1] _mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/zuvsp/Memtrack.vhd; in [2] wzskcmbd/gbl/JobWzskAcqMemtrack.{h/cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcDebug.{h/cpp}</p>
 <p>This deep-dive covers the use of Whiznium for a topic that oftentimes implies unnecessary vendor lock-in: live probing of an FPGA design. The module templates <em>gptrack_Easy_v1_0</em> (general purpose signals) and <em>fsmtrack_Easy_v1_0</em> (FSM states) serve this purpose.</p>
 <img src="KB4/image1.png" alt="image1.png" height="281">

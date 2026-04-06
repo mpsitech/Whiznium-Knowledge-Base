@@ -1,0 +1,134 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Decimation for Preview (KB2) &mdash; The Whiznium Knowledge Base  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=43b6ff34" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" href="KB3.html" />
+    <link rel="prev" title="Stepper Motor Control (KB1)" href="KB1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            The Whiznium Knowledge Base
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Image Decimation for Preview (KB2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB20.html">Mastering the Job Tree (KB20)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Whiznium Knowledge Base</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Image Decimation for Preview (KB2)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/KB2.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="image-decimation-for-preview-kb2">
+<h1>Image Decimation for Preview (KB2)<a class="headerlink" href="#image-decimation-for-preview-kb2" title="Link to this heading"></a></h1>
+<p><em>Published: April 06, 2026</em></p>
+<p><em>Highlights vertical integration from RTL level across Linux to web UI.</em></p>
+<p><em>Categories: WhizniumSBE, WhizniumDBE, Whiznium CV Demonstrator, System-level Connectivity</em></p>
+<p>Model and source code file pointers: in [1] _mdl/IexWdbe{Mdl,Csx}_wskd.xlsx, fpgawskd/zuvsp/Decim.vhd; in [2] _mdl/IexWznmUix_wzsk.xlsx, wzskcmbd/ gbl/JobWzsk{SrcZuvsp, AcqPreview}.{h, cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcConfig.{h, cpp}, webappwzsk/CrdWzskHwc/PnlWzskHwcConfig{.js, _CusImg.xml}</p>
+<p>The camera sensor delivers frames of at least 2592x1944 raw, or 1296x972 de-mosaiced RGB resolution, at up to 60 fps with an associated data rate of &gt; 200 MB/s. This is excessive for displaying preview images in the web UI. To slash the data rate, on the RTL side, a decimation module, called <em>decim</em>, is implemented which, based on a single configurable <em>edge</em> parameter, averages over edge x edge raw pixels to generate preview images. This is achieved using a sophisticated load/store unit, a block RAM row buffer and a fractional multiplier that approximates the integer division required for averaging.</p>
+<p>To achieve basic control of the <em>decim</em> RTL module from the CPU side, in the <em>IexWdbeCsx</em> model file, it is declared a <em>controller</em>. Controllers can be equipped with commands, mainly <em>config(rgbNotGray[bool], edge[uint8], edge2[uint16], NDecim[uint16])</em> for configuration, <em>set(rng[bool])</em> to start/stop operation and <em>(tixVState[uint8], tkst[uint32]) = getInfo()</em> for status polling in the case of <em>decim</em>. WhizniumDBE uses this information to generate a project-specific C++ library exposing these commands to user space and bytecode encoding CPU-side, along with RTL decoding and handshake logic FPGA-side.</p>
+<p>In WhizniumDBE-backed projects, besides commands, <em>buffer transfers</em> can be attributed to controllers: they are not copy-free in the same way as DMA is but retain the interface-agnostic characteristic (for example SPI or UART instead of AXIlite) of command passing. This feature, declared as shown in Figure 1, is used to read out the 38 kB <em>pvwbuf</em> buffer which is implemented in block RAM as a sub-module of <em>decim</em>.</p>
+<img src="KB2/image1.png" alt="image1.png" height="342">
+<p><em>Figure 1: Relevant IexWdbeMdl model file portion to infer buffer transfer</em></p>
+<p>On the CPU side, the WhizniumSBE-backed project is organized into a collection of C++ classes or <em>jobs</em>, with each job having a clearly defined responsibility for either a hardware feature or in UI / M2M session control. At runtime, job objects are assembled into an interconnected hierarchy called the <em>job tree</em>. This approach ensures non-interfering hardware access, information sharing and hardware abstraction – when needed – in a well-defined manner.</p>
+<p>For the case of preview image acquisition, a separate thread <em>runPvw()</em> inside the job <em>JobWzskAcqPreview</em> handles configuration, status polling and data transfers from the FPGA side. The buffer transfer target is a three-item result buffer <em>resultPvw</em> initialized once, thus avoiding dynamic memory allocation at run-time. Once a frame acquisition completes, notification of the daemon’s <em>job processors</em> (aka. worker threads) is handled via the external call <em>CallWzskResultNew</em>, which is then passed upwards the job tree to web UI jobs, specifically to <em>PnlWzskHwcConfig</em>. As each <em>result item</em> is equipped with a mutex lock, the acquisition thread can keep acquiring new preview frames from the FPGA subsystem while older frames are being processed upstream in the job tree without provoking memory access conflicts.</p>
+<p>To enable display in the web UI, WhizniumSBE auto-generates the infrastructure for message-passing between multi-threaded daemon and web UI using HTTP(S): to this end, <em>dispatches</em>, which are C++ objects server-side, are used. They are serialized to XML or JSON (using Base64 encoding for binary data) in auto-generated code. Dispatches handling standard UI controls such as text boxes, buttons and sliders are derived automatically. For the special purpose of image display, a custom control <em>PnlWzskHwcConfig.CusImg</em> is declared along with a custom dispatch <em>DpchWzskHwcConfigLive</em> in <em>IexWznmUix</em> and <em>IexWznmJtr</em>, respectively. On reception of the <em>CallWzskResultNew</em>, one such dispatch is populated via straight copy from the FPGA-delivered data and subsequently scheduled for transfer to the web UI.</p>
+<img src="KB2/image2.png" alt="image2.png" height="786">
+<p><em>Figure 2: Web UI display of live RGB preview image</em></p>
+<p>Finally, in the web UI, which performs continuous “long-polling” to the server, the dispatch arrives. Its RGB content is extracted into a <em>Uint8Array</em> after which the custom JavaScript method <em>refreshLive()</em> handles its display in a HTML5 canvas.</p>
+<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i</a></p>
+<p>[2] CV demonstrator Linux daemon <a class="reference external" href="https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i">https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="KB1.html" class="btn btn-neutral float-left" title="Stepper Motor Control (KB1)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="KB3.html" class="btn btn-neutral float-right" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, MPSI Technologies GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

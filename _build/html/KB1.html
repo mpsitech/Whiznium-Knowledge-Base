@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" href="KB3.html" />
+    <link rel="next" title="Image Decimation for Preview (KB2)" href="KB2.html" />
     <link rel="prev" title="Whiznium CV Demonstrator (KB0)" href="KB0.html" /> 
 </head>
 
@@ -46,13 +46,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Stepper Motor Control (KB1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB2.html">Image Decimation for Preview (KB2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB20.html">Mastering the Job Tree (KB20)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KB22.html">Whiznium Initialization (KB22)</a></li>
 </ul>
 
         </div>
@@ -81,7 +81,7 @@
              
   <section id="stepper-motor-control-kb1">
 <h1>Stepper Motor Control (KB1)<a class="headerlink" href="#stepper-motor-control-kb1" title="Link to this heading"></a></h1>
-<p><em>Published: April 6, 2026</em></p>
+<p><em>Published: April 06, 2026</em></p>
 <p><em>Highlights the basic use of FPGA design sub-modules as virtual controllers.</em></p>
 <p><em>Categories: WhizniumDBE, Whiznium CV Demonstrator</em></p>
 <p>Model and source code file pointers: in [1] _mdl/IexWdbe{Csx, Dpl}_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspRotary.h, fpgawskd/zuvsp/{Hostif, Rotary}.vhd, wskdterm/Wskdterm_exe.cpp; in [2] _mdl/IexWznm{Gbl, Job}_wzsk.xlsx, wzskcmbd/gbl/JobWzskSrcZuvsp.cpp, wzskcmbd/CrdWzskLlv/PnlWzskLlvTermZuvsp.cpp</p>
@@ -109,14 +109,15 @@
 <p>A second, experimental, RTL module template <em>aximmcohostif_Easy_v1_0</em> is provided for more classical memory-mapped interaction between host and FPGA subsystem, it requires the <em>mmapNotBus</em> flag to be specified in the device tree node.</p>
 <p><b><u>Extra: interactive terminal as standalone command-line executable</u></b></p>
 <p>The default WhizniumDBE deliverables, as specified in IexWdbeDpl_wskd, only comprise <em>ezdevwskd</em> and <em>fpgawskd</em> for CPU host library and RTL code, respectively. By adding <em>wskdterm</em> to the set, WhizniumDBE will additionally auto-generate a Linux command-line executable building on the CPU host library, which allows for the interactive execution of commands and buffer transfers on the FPGA subsystem.</p>
-<p>Figure 4: Interactive terminal trace for command invocation and buffer transfer to file</p>
+<img src="KB1/image8.png" alt="image8.png" height="737">
+<p><em>Figure 4: Interactive terminal trace for command invocation and buffer transfer to file (slightly edited for clarity)</em></p>
 <p><b><u>Extra: interactive terminal as integrated web UI feature</u></b></p>
 <p>To take things a step further, interactive FPGA subsystem command execution in the Linux daemon’s web UI is provided if the WhizniumSBE <em>capability</em> (templated functionality for Linux daemons) <em>PnlWzskLlvTermZuvsp</em> of type <em>dbeterm</em> is specified in IexWznmGbl_wzsk. It is subsequently linked up to the web UI’s host card and the FPGA subsystem source <em>job</em> in IexWznmJob_wzsk.</p>
-<img src="KB1/image8.png" alt="image8.png" height="574">
+<img src="KB1/image9.png" alt="image9.png" height="718">
 <p><em>Figure 5: Interactive terminal as web UI panel</em></p>
 <p>As interactive command execution is a debug-only feature, the corresponding panel is typically placed on a card that is visible to administrators only, with user access rights configured accordingly.</p>
-<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.14i</a></p>
-<p>[2] CV demonstrator Linux daemon <a class="reference external" href="https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i">https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.12i</a></p>
+<p>[1] CV demonstrator RTL code and C++ access library <a class="reference external" href="https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i">https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device/tree/v1.2.15i</a></p>
+<p>[2] CV demonstrator Linux daemon <a class="reference external" href="https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i">https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i</a></p>
 </section>
 
 
@@ -124,7 +125,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="KB0.html" class="btn btn-neutral float-left" title="Whiznium CV Demonstrator (KB0)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="KB3.html" class="btn btn-neutral float-right" title="FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="KB2.html" class="btn btn-neutral float-right" title="Image Decimation for Preview (KB2)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,13 +1,15 @@
 AMD MPSoC variant (KB6)
 =======================
 
-*Published: April 6, 2026*
+*Published: official date pending*
 
 *Highlights the platform-specifics and build instructions for Avnet\'s ZUBoard.*
 
 *Categories: Whiznium CV demonstrator, FPGA vendors*
 
 <b><u>Overview</u></b>
+
+<img src="KB6/setup_low.jpg" alt="setup_low.jpg" height="600">
 
 <b><u>Quick Start</u></b>
 

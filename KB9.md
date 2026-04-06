@@ -1,12 +1,11 @@
 Pipelined Corner Detection Algorithm (KB9)
 ==========================================
 
-*Published: April 6, 2026*
+*Published: official date pending*
 
 *Highlights pipelined and parallel execution, a key FPGA strength.*
 
 *Categories: WhizniumDBE, Whiznium CV Demonstrator*
-
 
 Model and source code file pointers: in \[1\] \_mdl/IexWdbeFin_wskd.xlsx, ezdevwskd/UntWskdZuvsp/CtrWskdZuvspCorner.h, fpgawskd/zuvsp/{Corner/Videoin}.vhd
 
@@ -29,13 +28,13 @@ Particularly the multiplier stages are not suitable for single-clock execution a
 It is worth noting that the pipeline can only work if pixel data from multiple, here five, rows is made available at any given clock cycle. The corresponding buffering and replay is accomplished inside Videoin.vhd, from where grayscale pixel data is streamed into Corner.vhd via grayVideoinToManyAXIS.
 
 
-<img src="KB2/image1.png" alt="image1.png" height="598">
+<img src="KB9/image1.png" alt="image1.png" height="598">
 
 *Figure 1a: Register-to-register pipeline for calculation of the per-pixel Harris score (1/2)*
 
 
 
-<img src="KB2/image2.png" alt="image2.png" height="442">
+<img src="KB9/image2.png" alt="image2.png" height="442">
 
 *Figure 1b: Register-to-register pipeline for calculation of the per-pixel Harris score (2/2)*
 
