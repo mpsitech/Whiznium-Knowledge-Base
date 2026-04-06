@@ -3,7 +3,7 @@ IP cores for vendor-agnostic design probing (KB4)
 
 *Published: official date pending*
 
-*Highlights the [use of templates for signal-level debug outside of vendor IDE\'s]{.mark}.*
+*Highlights the use of templates for signal-level debug outside of vendor IDE\'s.*
 
 *Categories: WhizniumSBE, Whiznium CV Demonstrator, FPGA Vendors*
 
