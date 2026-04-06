@@ -20,6 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Whiznium Initialization (KB22)" href="KB22.html" />
     <link rel="prev" title="Microchip PolarFire SoC variant (KB8)" href="KB8.html" /> 
 </head>
 
@@ -45,13 +46,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="KB0.html">Whiznium CV Demonstrator (KB0)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB1.html">Stepper Motor Control (KB1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KB2.html">Pipelined Corner Detection Algorithm (KB2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Mastering the Job Tree (KB20)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB22.html">Whiznium Initialization (KB22)</a></li>
 </ul>
 
         </div>
@@ -80,7 +81,7 @@
              
   <section id="mastering-the-job-tree-kb20">
 <h1>Mastering the Job Tree (KB20)<a class="headerlink" href="#mastering-the-job-tree-kb20" title="Link to this heading"></a></h1>
-<p><em>Published: February 27, 2026</em></p>
+<p><em>Published: April 6, 2026</em></p>
 <p>Model and source code file pointers: in [2] _mdl/IexWznm{Job, Jtr}_wzsk.xlsx, wzskcmbd/Wzskcmbd.{h, cpp}, wzskcmbd/gbl/JobWzsk{SrcZuvsp, ActRotary}.{h, cpp}</p>
 <p>At this point, the CPU-side concept of the <em>job tree</em> should be introduced. Any Embedded System development mandates clearly defined software responsibilities for control and observation of hardware features. WhizniumSBE encourages splitting functionality into a fine-grained hierarchy of <em>jobs</em>, with each job resulting in a dedicated C++ class and source code file, exemplified for the CV demonstrator project in Figure 9. Super jobs <em>#include</em> their sub-jobs and can access their functionality directly. In addition, sophisticated thread-safe inter-job call passing is part of every WhizniumSBE-backed design.</p>
 <img src="KB20/image1.png" alt="image1.png" height="836">
@@ -96,6 +97,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="KB8.html" class="btn btn-neutral float-left" title="Microchip PolarFire SoC variant (KB8)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="KB22.html" class="btn btn-neutral float-right" title="Whiznium Initialization (KB22)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

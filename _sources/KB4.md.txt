@@ -1,7 +1,7 @@
 IP cores for vendor-agnostic design probing (KB4)
 =================================================
 
-*Published: February 27, 2026*
+*Published: April 6, 2026*
 
 *Highlights the [use of templates for signal-level debug outside of vendor IDE\'s]{.mark}.*
 

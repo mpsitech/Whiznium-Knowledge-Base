@@ -1,7 +1,7 @@
 Whiznium CV Demonstrator (KB0)
 ==============================
 
-*Published: February 27, 2026*
+*Published: April 6, 2026*
 
 *Highlights demonstrator project and paths of exploration.*
 

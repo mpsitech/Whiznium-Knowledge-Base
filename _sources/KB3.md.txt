@@ -1,7 +1,7 @@
 FPGA-based full-frame HDR image calculation in shared DDR memory space (KB3)
 ============================================================================
 
-*Published: February 27, 2026*
+*Published: April 6, 2026*
 
 *Highlights external memory inclusion and platform-specific implications.*
 
