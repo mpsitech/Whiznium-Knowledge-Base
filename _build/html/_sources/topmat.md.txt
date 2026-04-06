@@ -21,14 +21,14 @@ sys: system integration across the Embedded Full Stack<br>
 
 |wznm|wdbe|wcvd|vnd|sys|identifier|release date|spotlight on ...|
 |:--:|:--:|:--:|:-:|:-:|---|---|---|
-|    |    |x   |   |   |KB0 Whiznium CV Demonstrator|2026-04-05|demontstrator project and paths of exploration|
-|    |x   |x   |   |   |KB1 Stepper Motor Control|2026-04-05|basic use of FPGA design sub-modules as virtual controllers|
-|    |x   |x   |   |x  |KB2 Image Decimation for Preview|2026-04-05|vertical integration from RTL level across Linux to web UI|
-|    |x   |x   |   |   |KB3 HDR Image Generation DMA|2026-04-05|inclusion of external memory and platform-specific implications|
-|x   |    |x   |x  |   |KB4 Vendor-Agnostic Design Probing|2026-04-05|use of templates for signal-level debug outside of vendor IDE's|
-|x   |    |x   |   |   |KB5 Daemon Command Line Debug|2026-04-05|built-in daemon features to debug job-job interaction and multi-threading|
-|    |    |x   |x  |   |KB6 AMD MPSoC Variant|2026-04-05|platform-specifics and build instructions for Avnet's ZUBoard|
-|    |    |x   |x  |   |KB7 Efinix Titanium Variant|2026-04-05|platform-specifics and build instructions for Efinix's Ti180 dev kit|
+|    |    |x   |   |   |KB0 Whiznium CV Demonstrator|2026-04-06|demontstrator project and paths of exploration|
+|    |x   |x   |   |   |KB1 Stepper Motor Control|2026-04-06|basic use of FPGA design sub-modules as virtual controllers|
+|    |x   |x   |   |x  |KB2 Image Decimation for Preview|2026-04-06|vertical integration from RTL level across Linux to web UI|
+|    |x   |x   |   |   |KB3 HDR Image Generation DMA|2026-04-06|inclusion of external memory and platform-specific implications|
+|x   |    |x   |x  |   |KB4 Vendor-Agnostic Design Probing|2026-04-0x|use of templates for signal-level debug outside of vendor IDE's|
+|x   |    |x   |   |   |KB5 Daemon Command Line Debug|2026-04-0x|built-in daemon features to debug job-job interaction and multi-threading|
+|    |    |x   |x  |   |KB6 AMD MPSoC Variant|2026-04-0x|platform-specifics and build instructions for Avnet's ZUBoard|
+|    |    |x   |x  |   |KB7 Efinix Titanium Variant|2026-04-0x|platform-specifics and build instructions for Efinix's Ti180 dev kit|
 |    |    |x   |x  |   |<div style="color:lightgray">KB8 Microchip PolarFire SoC Variant</div>|release pipeline #2|platform-specifics and build instructions for Microchip's MPFS Disco kit|
 |    |x   |x   |   |   |<div style="color:lightgray">KB9 Pipelined Corner Detection Algorithm</div>|release pipeline #1|pipelined and parallel execition, a key FPGA strength|
 |x   |    |    |   |x  |<div style="color:lightgray">KB10 Web UI Customization</div>|TBD|integration of non-standard UI features into auto-generated context|
