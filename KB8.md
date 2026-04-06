@@ -1,11 +1,43 @@
 Microchip PolarFire SoC variant (KB8)
 =====================================
 
-*Published: February 12, 2026*
+*Published: official date pending*
 
-*Spotlight on: platform-specifics and build instructions for Microchip\'s MPFS Disco kit*
+*Highlights the platform-specifics and build instructions for Microchip\'s MPFS Disco kit.*
 
-Overview
+*Categories: Whiznium CV demonstrator, FPGA vendors*
+
+<b><u>Overview</u></b>
+
+<b><u>Quick Start</u></b>
+
+```
+wget https://content.mpsitech.cloud/artefacts/disco_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz
+sudo gunzip -c disco_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | sudo dd of=/dev/sda bs=64K
+```
+
+<a href="https://content.mpsitech.cloud/artefacts/disco_wzsk_v1.2.16_wskd_v1.2.15_MPFS_DISCOVERY_KIT.job" target="_blank">disco_wzsk_v1.2.16_wskd_v1.2.15_MPFS_DISCOVERY_KIT.job</a>
+
+<b><u>VSP Core Libero Workflow</u></b>
+
+<a href="https://content.mpsitech.cloud/projects/disco_vsp_core_v1.2.15.tgz" target="_blank">disco_vsp_core_v1.2.15.tgz</a>
+
+<b><u>Top-level Libero Workflow</u></b>
+
+<img src="KB8/wskd.png" alt="wskd.png" height="600">
+
+*Figure 1: Libero SmartDesign*
+
+<img src="KB8/mss_wrapper.png" alt="mss_wrapper.png" height="600">
+
+<a href="https://content.mpsitech.cloud/projects/disco_polarfire-soc-discovery-kit-reference-design-main_v1.2.15.tgz" target="_blank">disco_polarfire-soc-discovery-kit-reference-design-main_v1.2.15.tgz</a>
+
+<b><u>Yocto Workflow</u></b>
+
+<a href="https://content.mpsitech.cloud/projects/disco_wzsk_v1.2.16_meta-mchp.tgz" target="_blank">disco_wzsk_v1.2.16_meta-mchp.tgz</a>, <a href="https://content.mpsitech.cloud/projects/disco_wzsk_v1.2.16_meta-mpsi.tgz" target="_blank">disco_wzsk_v1.2.16_meta-mpsi.tgz</a>
+
+
+<b><u>OLD FROM HERE</u></b>
 
 The ZUBoard, featuring the AMD's lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (\< USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.
 

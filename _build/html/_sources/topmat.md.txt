@@ -3,7 +3,7 @@ Getting around
 
 The Whiznium Knowledge Base (which you are looking at) is a great way to explore various Whiznium-related topics in depth.
 
-Its articles refer to the Whiznium tools, [WhizniumSBE](https://github.com/mpsitech/wznm-WhizniumSBE) (Service Builder's Edition, for Linux daemons) and [WhizniumDBE](https://github.com/mpsitech/wdbe-WhizniumDBE) (Device Builder's Edition, for RTL designs and their host-side access libraties), for which you can find step-by-step setup instructions in [The Whiznium Documentation](https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/setup.md).
+Its articles refer to the Whiznium tools, [WhizniumSBE](https://github.com/mpsitech/wznm-WhizniumSBE) (Service Builder's Edition, for Linux daemons) and [WhizniumDBE](https://github.com/mpsitech/wdbe-WhizniumDBE) (Device Builder's Edition, for RTL designs and their host-side access libraries), for which you can find step-by-step setup instructions in [The Whiznium Documentation](https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/setup.md).
 
 Many examples found here are based on the Whiznium Computer Vision Demonstrator which is tabletop 3D laser scanner hardware, powered by entry-level development kits of various FPGA(-SoC) vendors. [Contact MPSI](mailto:contact@mpsitechnologies.com) to obtain your unit with the hardware variant of your choice. Discounts are available for classroom quantities.
 
