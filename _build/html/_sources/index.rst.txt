@@ -11,14 +11,14 @@ Welcome to the Whiznium Knowledge Base
 
    Whiznium CV Demonstrator (KB0) <./KB0.md>
    Stepper Motor Control (KB1) <./KB1.md>
-   Pipelined Corner Detection Algorithm (KB2) <./KB2.md>
+   Image Decimation for Preview (KB2) <./KB2.md>
    HDR Image Generation DMA (KB3) <./KB3.md>
    Vendor-Agnostic Design Probing (KB4) <./KB4.md>
    Daemon Command Line Debug (KB5) <./KB5.md>
    AMD MPSoC Variant (KB6) <./KB6.md>
    Efinix Titanium Variant (KB7) <./KB7.md>
    Microchip PolarFire SoC Variant (KB8) <./KB8.md>
-   Whiznium Initialization (KB9) <./KB9.md>
+   Pipelined Corner Detection Algorithm (KB9) <./KB9.md>
    Web UI Customization (KB10) <./KB10.md>
    Complex Database Structures (KB11) <./KB11.md>
    C++ and Java Accessor Apps (KB12) <./KB12.md>
@@ -31,6 +31,8 @@ Welcome to the Whiznium Knowledge Base
    AMD Artix 7 Variant (KB19) <./KB19.md>
    Mastering the Job Tree (KB20) <./KB20.md>
    Modern Web UI's using Vue.js (KB21) <./KB21.md>
+   Whiznium Initialization (KB22) <./KB22.md>
+   Anatomy of a WhizniumSBE Project (KB23) <./KB23.md>
 
 .. include:: topmat.md
    :parser: myst_parser.sphinx_
@@ -38,4 +40,4 @@ Welcome to the Whiznium Knowledge Base
 Release
 =======
 
-Last update: February 10, 2026.
+Last update: April 6, 2026.
