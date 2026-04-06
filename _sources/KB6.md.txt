@@ -1,18 +1,39 @@
 AMD MPSoC variant (KB6)
 =======================
 
-*Published: February 12, 2026*
+*Published: April 6, 2026*
+
+*Highlights the platform-specifics and build instructions for Avnet\'s ZUBoard.*
 
 *Categories: Whiznium CV demonstrator, FPGA vendors*
 
-*Spotlight on: platform-specifics and build instructions for Avnet\'s ZUBoard*
-
 <b><u>Overview</u></b>
+
+<b><u>Quick Start</u></b>
+
+```
+wget https://content.mpsitech.cloud/artefacts/zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz
+sudo gunzip -c zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | sudo dd of=/dev/sda bs=64K
+```
+
+<b><u>VSP Core Vivado Workflow</u></b>
+
+<a href="https://content.mpsitech.cloud/projects/zudvk_vsp_core_v1.2.15.tgz" target="_blank">zudvk_vsp_core_v1.2.15.tgz</a>
+
+<b><u>Top-level Vivado Workflow</u></b>
 
 <img src="KB6/wskd.png" alt="wskd.png" height="600">
 
 *Figure 1: Vivado block design*
 
+<a href="https://content.mpsitech.cloud/projects/zudvk_wskd_v1.2.15.tgz" target="_blank">zudvk_wskd_v1.2.15.tgz</a>
+
+<b><u>PetaLinux (Yocto) Workflow</u></b>
+
+<a href="https://content.mpsitech.cloud/projects/zudvk_wzsk_v1.2.16_project_spec.tgz" target="_blank">zudvk_wzsk_v1.2.16_project_spec.tgz</a>
+
+
+<b><u>OLD FROM HERE</u></b>
 
 The ZUBoard, featuring the AMD's lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (\< USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.
 
