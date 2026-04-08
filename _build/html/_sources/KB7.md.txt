@@ -9,6 +9,10 @@ Efinix Titanium variant (KB7)
 
 <b><u>Overview</u></b>
 
+<img src="KB7/setup_low.jpg" alt="setup_low.jpg" height="600">
+
+*Figure 1: Hardware setup in action*
+
 <b><u>Quick Start</u></b>
 
 ```

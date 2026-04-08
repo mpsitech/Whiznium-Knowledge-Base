@@ -87,12 +87,20 @@
 <p><em>Categories: WhizniumSBE, Whiznium CV Demonstrator, FPGA Vendors</em></p>
 <p>Model and source code file pointers: in [1] _mdl/IexWdbeMdl_wskd.xlsx, fpgawskd/zuvsp/Memtrack.vhd; in [2] wzskcmbd/gbl/JobWzskAcqMemtrack.{h/cpp}, wzskcmbd/CrdWzskHwc/PnlWzskHwcDebug.{h/cpp}</p>
 <p>This deep-dive covers the use of Whiznium for a topic that oftentimes implies unnecessary vendor lock-in: live probing of an FPGA design. The module templates <em>gptrack_Easy_v1_0</em> (general purpose signals) and <em>fsmtrack_Easy_v1_0</em> (FSM states) serve this purpose.</p>
-<img src="KB4/image1.png" alt="image1.png" height="281">
-<p><em>Figure 1: GTKWave displaying AXI4 full handshake signals for DDR memory write-then-read at each end-of-line of Example III</em></p>
-<p>To track the relevant AXI4 full signals during DDR memory operations, <em>gptrack_Easy_v1_0</em> is instantiated as <em>memtrack</em>. In the module parameter section of the <em>IexWdbeMdl</em> model file entry, the capture signal clock, capture / trigger signal identifiers and the sequence buffer size are specified. Based on the vendor- and CPU-host-interface-agnostic IP core, then a customized version is generated which is accessible through commands and buffer transfers from the CPU side. A single instance captures up to 15-bit wide data with registered inputs, and it also features compressed storage for periods during which none of the signals change.</p>
 <p><b><u>General-purpose signal tracking</u></b></p>
+<img src="KB4/image1.png" alt="image1.png" height="501">
+<p><em>Figure 1: Web UI for general-purpose signal track acquisition</em></p>
+<img src="KB4/image2.png" alt="image2.png" height="281">
+<p><em>Figure 2: GTKWave displaying AXI4 full handshake signals for DDR memory write-then-read for the HDR functionality at each end-of-line</em></p>
+<p>To track the relevant AXI4 full signals during DDR memory operations, <em>gptrack_Easy_v1_0</em> is instantiated as <em>memtrack</em>. In the module parameter section of the <em>IexWdbeMdl</em> model file entry, the capture signal clock, capture / trigger signal identifiers and the sequence buffer size are specified. Based on the vendor- and CPU-host-interface-agnostic IP core, then a customized version is generated which is accessible through commands and buffer transfers from the CPU side. A single instance captures up to 15-bit wide data with registered inputs, and it also features compressed storage for periods during which none of the signals change.</p>
 <p>In the</p>
 <p><b><u>FSM state tracking</u></b></p>
+<img src="KB4/image3.png" alt="image3.png" height="586">
+<p><em>Figure 3: Web UI for FSM state track acquisition</em></p>
+<img src="KB4/image4.png" alt="image4.png" height="237">
+<p><em>Figure 4a: GTKWave displaying the RGB egress FSM states of the videoin module during 1+ lines</em></p>
+<img src="KB4/image5.png" alt="image5.png" height="237">
+<p><em>Figure 4b: GTKWave detail of the above towards close to end-of-line</em></p>
 <p><b><u>CPU-side elements</u></b></p>
 <p>As in previous examples, a pre-defined WhizniumSBE <em>capability</em> is used for buffer read-out, .vcd file generation and storage. The corresponding control panel <em>PnlWzskHwcDebug</em> is shown at the bottom right of Figure 10. It instantiates <em>JobWzskAcqMemtrack</em> as sub-job which in turn interacts with the FPGA subsystem via <em>JobWzskSrc*vsp</em> using a trigger / poll loop. Finally, Figure 11 displays a waveform captured on an AMD MPSoC system in an industry-standard tool.</p>
 <p>The capability, currently limited to acquiring the track of a single module at a time, results in an interactive</p>
