@@ -11,6 +11,8 @@ AMD MPSoC variant (KB6)
 
 <img src="KB6/setup_low.jpg" alt="setup_low.jpg" height="600">
 
+*Figure 1: Hardware setup in action*
+
 <b><u>Quick Start</u></b>
 
 ```
@@ -26,7 +28,7 @@ sudo gunzip -c zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | sudo dd of=/dev/
 
 <img src="KB6/wskd.png" alt="wskd.png" height="600">
 
-*Figure 1: Vivado block design*
+*Figure 2: Vivado block design*
 
 <a href="https://content.mpsitech.cloud/projects/zudvk_wskd_v1.2.15.tgz" target="_blank">zudvk_wskd_v1.2.15.tgz</a>
 

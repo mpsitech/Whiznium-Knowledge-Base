@@ -26,9 +26,11 @@ sudo gunzip -c disco_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | sudo dd of=/dev/
 
 <img src="KB8/wskd.png" alt="wskd.png" height="600">
 
-*Figure 1: Libero SmartDesign*
+*Figure 1: Libero SmartDesign (top-level)*
 
 <img src="KB8/mss_wrapper.png" alt="mss_wrapper.png" height="600">
+
+*Figure 2: Libero SmartDesign (MSS wrapper detail)*
 
 <a href="https://content.mpsitech.cloud/projects/disco_polarfire-soc-discovery-kit-reference-design-main_v1.2.15.tgz" target="_blank">disco_polarfire-soc-discovery-kit-reference-design-main_v1.2.15.tgz</a>
 
