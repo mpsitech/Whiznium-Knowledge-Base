@@ -14,7 +14,7 @@ Welcome to the Whiznium Knowledge Base
    Image Decimation for Preview (KB2) <./KB2.md>
    HDR Image Generation DMA (KB3) <./KB3.md>
    Vendor-Agnostic Design Probing (KB4) <./KB4.md>
-   Daemon Command Line Debug (KB5) <./KB5.md>
+   Mastering the Job Tree (KB5) <./KB5.md>
    AMD MPSoC Variant (KB6) <./KB6.md>
    Efinix Titanium Variant (KB7) <./KB7.md>
    Microchip PolarFire SoC Variant (KB8) <./KB8.md>
@@ -29,7 +29,7 @@ Welcome to the Whiznium Knowledge Base
    Parametrized Median Filter Module Template (KB17) <./KB17.md>
    Managed File Archive Capability (KB18) <./KB18.md>
    AMD Artix 7 Variant (KB19) <./KB19.md>
-   Mastering the Job Tree (KB20) <./KB20.md>
+   Daemon Command Line Debug (KB20) <./KB20.md>
    Modern Web UI's using Vue.js (KB21) <./KB21.md>
    Whiznium Initialization (KB22) <./KB22.md>
    Anatomy of a WhizniumSBE Project (KB23) <./KB23.md>
