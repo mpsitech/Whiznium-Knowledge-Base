@@ -26,9 +26,9 @@ sys: system integration across the Embedded Full Stack<br>
 |    |x   |x   |   |x  |KB2 Image Decimation for Preview|2026-04-06|vertical integration from RTL level across Linux to web UI|
 |    |x   |x   |   |   |KB3 HDR Image Generation DMA|2026-04-06|inclusion of external memory and platform-specific implications|
 |x   |    |x   |x  |   |KB4 Vendor-Agnostic Design Probing|2026-04-08|use of templates for signal-level debug outside of vendor IDE's|
-|x   |    |x   |   |   |KB5 Daemon Command Line Debug|2026-04-0x|built-in daemon features to debug job-job interaction and multi-threading|
-|    |    |x   |x  |   |KB6 AMD MPSoC Variant|2026-04-0x|platform-specifics and build instructions for Avnet's ZUBoard|
-|    |    |x   |x  |   |KB7 Efinix Titanium Variant|2026-04-0x|platform-specifics and build instructions for Efinix's Ti180 dev kit|
+|x   |    |x   |   |   |KB5 Mastering the Job Tree|2026-04-12|key concepts of the run-time job hierarchy including calls and dispatches|
+|    |    |x   |x  |   |KB6 AMD MPSoC Variant|2026-04-13|platform-specifics and build instructions for Avnet's ZUBoard|
+|    |    |x   |x  |   |KB7 Efinix Titanium Variant|2026-04-13|platform-specifics and build instructions for Efinix's Ti180 dev kit|
 |    |    |x   |x  |   |<div style="color:lightgray">KB8 Microchip PolarFire SoC Variant</div>|release pipeline #2|platform-specifics and build instructions for Microchip's MPFS Disco kit|
 |    |x   |x   |   |   |<div style="color:lightgray">KB9 Pipelined Corner Detection Algorithm</div>|release pipeline #1|pipelined and parallel execition, a key FPGA strength|
 |x   |    |    |   |x  |<div style="color:lightgray">KB10 Web UI Customization</div>|TBD|integration of non-standard UI features into auto-generated context|
@@ -41,7 +41,7 @@ sys: system integration across the Embedded Full Stack<br>
 |    |x   |    |   |   |<div style="color:lightgray">KB17 Parametrized Median Filter Module Template</div>|TBD|WhizniumDBE customization with modeling and vendor-specific code generation|
 |x   |    |    |   |   |<div style="color:lightgray">KB18 Managed File Archive Capability</div>|TBD|WhizniumSBE customization comprising modeling and code generation|
 |    |    |x   |x  |   |<div style="color:lightgray">KB19 AMD Artix 7 Variant</div>|TBD|platform-specifics and build instructions for Digilent's Nexys Video board|
-|x   |    |x   |   |   |<div style="color:lightgray">KB20 Mastering the Job Tree</div>|release pipeline #3|key concepts of the run-time job hierarchy including calls and dispatches|
+|x   |    |x   |   |   |KB20 Daemon Command Line Debug|2026-04-12|built-in daemon features to debug job-job interaction and multi-threading|
 |x   |    |x   |   |   |<div style="color:lightgray">KB21 Modern Web UI's using Vue.js</div>|TBD|alternative Vue.js UI from generated code to transpilation and deployment|
 |x   |x   |    |   |   |<div style="color:lightgray">KB22 Whiznium Initialization</div>|TBD|baseline combined with custom / project-specific tool initialization|
 |x   |    |x   |   |   |<div style="color:lightgray">KB23 Anatomy of a WhizniumSBE Project</div>|TBD|source code tree organization and coding best practices|
