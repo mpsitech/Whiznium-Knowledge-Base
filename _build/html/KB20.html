@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mastering the Job Tree (KB20) &mdash; The Whiznium Knowledge Base  documentation</title>
+  <title>Daemon Command Line Debug (KB20) &mdash; The Whiznium Knowledge Base  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=43b6ff34" />
@@ -48,6 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="KB2.html">Image Decimation for Preview (KB2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB3.html">HDR Image Generation DMA (KB3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB4.html">Vendor-Agnostic Design Probing (KB4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KB5.html">Daemon Command Line Debug (KB5)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB6.html">AMD MPSoC Variant (KB6)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB7.html">Efinix Titanium Variant (KB7)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="KB8.html">Microchip PolarFire SoC Variant (KB8)</a></li>
@@ -69,7 +70,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Mastering the Job Tree (KB20)</li>
+      <li class="breadcrumb-item active">Daemon Command Line Debug (KB20)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/KB20.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,19 +80,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mastering-the-job-tree-kb20">
-<h1>Mastering the Job Tree (KB20)<a class="headerlink" href="#mastering-the-job-tree-kb20" title="Link to this heading"></a></h1>
-<p><em>Published: official date pending</em></p>
-<p><em>Highlights key concepts of the run-time job hierarchy including calls and dispatches.</em></p>
+  <section id="daemon-command-line-debug-kb20">
+<h1>Daemon Command Line Debug (KB20)<a class="headerlink" href="#daemon-command-line-debug-kb20" title="Link to this heading"></a></h1>
+<p><em>Published: April 12, 2026</em></p>
+<p><em>Highlights built-in daemon features to debug job-job interaction and multi-threading.</em></p>
 <p><em>Categories: WhizniumSBE, Whiznium CV Demonstrator</em></p>
-<p>Model and source code file pointers: in [2] _mdl/IexWznm{Job, Jtr}_wzsk.xlsx, wzskcmbd/Wzskcmbd.{h, cpp}, wzskcmbd/gbl/JobWzsk{SrcZuvsp, ActRotary}.{h, cpp}</p>
-<p>At this point, the CPU-side concept of the <em>job tree</em> should be introduced. Any Embedded System development mandates clearly defined software responsibilities for control and observation of hardware features. WhizniumSBE encourages splitting functionality into a fine-grained hierarchy of <em>jobs</em>, with each job resulting in a dedicated C++ class and source code file, exemplified for the CV demonstrator project in Figure 9. Super jobs <em>#include</em> their sub-jobs and can access their functionality directly. In addition, sophisticated thread-safe inter-job call passing is part of every WhizniumSBE-backed design.</p>
-<img src="KB20/image1.png" alt="image1.png" height="836">
-<p><em>Figure 1: CV demonstrator runtime job tree (slightly shortened) with jobs relevant for examples I-IV highlighted in color; stages in gray for jobs with attached state machines</em></p>
-<p>According to the above, on the one hand each hardware-controlling job should exist only once in controlling fashion, while on the other hand there can be multiple super-jobs requiring their functionality as sub-jobs. This contradiction is resolved by instantiating each hardware-controlling job once in server mode and multiple times in client mode – this is denoted as /SRV and /CLI, respectively, in Figure 9. Only the server instance actively performs operations on hardware, for example by holding file descriptors and allocated memory while relaying requests and results to client instances.</p>
-<p>FPGA subsystem access is achieved, for the AMD MPSoC variant of the CV demonstrator, by instantiating the job <em>JobWzskSrcZuvsp</em>. It funnels all command invocations and buffer transfers through a single character device, <em>/dev/dbeaxilite0</em>. To allow mutually independent super-jobs, such as <em>JobWzskActLaser</em> for line laser control and <em>JobWzskActRotary</em> for turntable control, to gain access to only a portion of the FPGA subsystem, the concept of <em>claims</em> is implemented, along with thread-safe handling methods. With it, at any given time, exactly one super-job can claim controlling access of either of the domains <em>corner/decim/hdreng/laser/step/trace/*track</em>. In an alternative implementation, multiple WhizniumDBE-backed IP cores, one for each domain, could be attached to the system.</p>
-<p>Also visible in Figure 9 are web UI session related jobs, which can be present multiple times in the job tree and which are not subject to the server / client construct of hardware control jobs. Specifically, under the user session <em>SessWzsk (31)</em>, handler jobs for <em>cards</em> – each card corresponds to one browser tab in the web UI – and <em>panels</em> are listed.</p>
-<p>Returning to Example I, a user-commanded turntable movement (see top left of Figure 10), is implemented via the job tree path <em>PnlWzskLlvRotary – JobWzskActRotary – JobWzskSrcZuvsp</em>, where <em>JobWzskActRotary</em> controls the move operation with the help of an attached state machine: it first issues a <em>moveto()</em> command to the FPGA subsystem via <em>JobWzskSrcZuvsp</em> and then receives periodical wakeup calls at which it tracks the progress, using polling and <em>getInfo()</em>, until done. <em>JobWzskActRotary</em> also serves as hardware abstraction layer (HAL): depending on the CV demonstrator hardware configured, it instantiates <em>JobWzskSrcDcvsp</em> (Microchip PolarFire SoC) or <em>JobWzskSrcTivsp</em> (Efinix Titanium), instead of <em>JobWzskSrcZuvsp</em> (AMD MPSoC), without changing the API towards its super-jobs.</p>
+<p>Source code file pointers: in [1] wzskcmbd/gbl/JobWzsk{AcqPreview, ActRotary}.{h, cpp}, wzskcmbd/Wzskcmbd.{h, cpp}; in [3] Mttypes.{h, cpp}</p>
+<p>The methodical approach any WhizniumSBE-backed project follows, e.g. by using the <em>job tree</em> concept, also allows to track related events in a structured fashion. To this end, any project is equipped with monitoring features which are designed to only require (minimal) compute resources when enabled. By default off, starting/stopping is achieved through the daemin command line as shown in Figure 1.</p>
+<img src="KB20/image1.png" alt="image1.png" height="569">
+<p><em>Figure 1: command-line standard command set with one occurrence each of event monitoring and multi-threading monitoring</em></p>
+<p><b><u>Monitoring of events</u></b></p>
+<p>The scope of this feature is the run-time evolution of the job tree, interactions between jobs and reactions to outside stimuli such as web UI requests. Managed via the <em>{start/stop}Mon</em> standard commands, monitoring output is written to a tab-separated text file named <em>period_&lt;timestamp&gt;.txt</em> in the executable’s directory. The output is instantaneous (or non-buffered) such that events up to an eventual executable stall or crash can be captured reliably.</p>
+<p>As can be seen in Figure 2, any monitoring period starts out with an initial snapshot of the job tree situation comprising jobs, call listeners, presettings and more (cf. KB5: Mastering the Job Tree). This is followed by the recording of time-stamped events which may also include modifications to the initial job tree: if, for example, a web UI card is closed, <em>remove</em> events for the corresponding jobs will be logged.</p>
+<img src="KB20/image2.png" alt="image2.png" height="520">
+<p><em>Figure 2: log output at beginning and end of monitoring period</em></p>
+<p>Taking turntable movement as a CV demonstrator example, Figure 3 shows the sequence of events from web UI initiation to movement completion. Highlighted are a. the web UI request / reply pair after selecting a target position on the interactive dial in green, b. events following each 250 ms wakeup to monitor the movement progress in orange and c. the stage changes of <em>JobWzskActRotary</em> to <em>moving</em> (2) and back to <em>idle</em> (1) in yellow.</p>
+<img src="KB20/image3.png" alt="image3.png" height="743">
+<p><em>Figure 3: log entries resulting from web UI triggered turntable movement</em></p>
+<p><b><u>Monitoring of multi-threading</u></b></p>
+<p>A second type of monitoring focusses on multi-threading and lists corresponding run-time activity along with the thread ID. This is particularly helpful for identifying deadlocks and other unwanted conditions which occur irregularly only. Log files (naming convention <em>mtmon_&lt;timestamp&gt;.txt</em>) are substantially larger compared to event logging, not least because already most events imply multiple condition and/or mutex operations.</p>
+<p>The WhizniumSBE core library [3] provides lightweight wrappers around the POSIX mutex and condition types <em>pthread_{cond/mutex}_t</em>, namely <em>Cond</em>, <em>Mutex</em> and <em>Rwmutex</em>, the latter to implement a read/write mutex. On the one hand, they can be passed string identifiers upon construction; on the other hand, their member functions such as <em>lock()/unlock()</em> can be called with string parameters hinting at the context of the respective invocations. These strings in turn are used by the monitoring feature to provide textual context of individual operations.</p>
+<p>Figures 4a-b show a typical scenario for the CV demonstrator with numerous threads at work simultaneously. Thread 6466 runs preview image acquisition, thread 6607 runs HDR image acquisition, threads 5218-5221 represent the pool of job processors, thread 6609 is responsible for web UI long polling.</p>
+<img src="KB20/image4.png" alt="image4.png" height="1485">
+<p><em>Figure 4a: typical multi-threading log entries (part 1/2), colors and comments added for clarity. Events rendered in blue concern FPGA subsystem calls.</em></p>
+<img src="KB20/image5.png" alt="image5.png" height="1336">
+<p><em>Figure 4b: typical multi-threading log entries (part 2/2)</em></p>
+<p><b><u>Extra: database-backed monitoring</u></b></p>
+<p>As an experimental feature, event logging to a SQL database is available. The corresponding relational database, as specified in [2] and shown in parts in Figures 5a-b, is well-suited to mirror the relations between job tree objects such as jobs and call listeners. It also allows to store clustering information of events that are mutually related. Database-backed monitoring is declared at the time of version stepping, by adding <em>dbsmon</em> to the version options (ixWOption) in the project’s <em>IexWznmPrj</em> model file. The make files are then automatically updated to link the daemon executable to the <em>libdbswzem</em> database access library.</p>
+<img src="KB20/image6.png" alt="image6.png" height="483">
+<p><em>Figure 5a: types of information gathered into SQL database tables during database-backed monitoring</em></p>
+<img src="KB20/image7.png" alt="image7.png" height="1180">
+<p><em>Figure 5b: detail view of job information</em></p>
+<p>At run-time, on embedded systems where SQLite is the DBMS of choice, it is advisable to place the database file (typically <em>DbsWzem.sql</em>) on a memory-based / temporary file system as SQLite enforces strict file system <em>sync</em> after each SQL <em>INSERT</em>. As soon as one or multiple monitoring periods (again using the <em>{start/stop}Mon</em> commands) have been recorded, the populated database file can be transferred to a workstation for result evaluation. The corresponding tool is part of any Whiznium base installation at <em>${WHIZROOT}/bin/wzemcmbd/Wzemcmbd</em>. By default, its web UI can be reached at port 14100.</p>
+<p>Figure 6 shows as an example how above-mentioned turntable movement events are visualized in the database-backed version of monitoring.</p>
+<img src="KB20/image8.png" alt="image8.png" height="1410">
+<p><em>Figure 6: event for web UI commanded turntable movement request with clustered reply event</em></p>
+<p>As WhizniumSBE Engine Monitor is a WhizniumSBE-backed project, all currently available web UI components are the defaults auto-generated by WhizniumSBE based on the project’s <em>IexWznmDbs</em> model file. For the future, more sophisticated, graphical timeline representations are envisioned.</p>
+<p>[1] CV demonstrator Linux daemon <a class="reference external" href="https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i">https://github.com/mpsitech/wzsk-Whiznium-StarterKit/tree/v1.2.16i</a></p>
+<p>[2] WhizniumSBE Engine Monitor <a class="reference external" href="https://github.com/mpsitech/wzem-WhizniumSBE-Engine-Monitor/tree/v1.0.10i">https://github.com/mpsitech/wzem-WhizniumSBE-Engine-Monitor/tree/v1.0.10i</a></p>
+<p>[3] WhizniumSBE core library <a class="reference external" href="https://github.com/mpsitech/sbecore-WhizniumSBE-Core-Library/tree/v1.1.19">https://github.com/mpsitech/sbecore-WhizniumSBE-Core-Library/tree/v1.1.19</a></p>
 </section>
 
 

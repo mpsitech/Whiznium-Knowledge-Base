@@ -14,7 +14,7 @@ Live probing of FPGA designs is a debug feature typically reserved for proprieta
 
 <b><u>General-purpose signal tracking</u></b>
 
-A feature of interest for in-design signal probing within the Whiznium CV Demonstrator's RTL code is the AXI interface connecting the *hdreng* module to DDR memory. In all FPGA-SoC variants, the DDR memory is shared with the device's CPU side which results in non-deterministic access patterns hard to capture in simulation.
+A feature of interest for in-design signal probing within the CV Demonstrator's RTL code is the AXI interface connecting the *hdreng* module to DDR memory. In all FPGA-SoC variants, the DDR memory is shared with the device's CPU side which results in non-deterministic access patterns hard to capture in simulation.
 
 To the end of probing the relevant AXI handshake signals, in the *IexWdbeMdl* model file, a module *memtrack* of type *gptrack_Easy_v1_0* is defined with clock source and top-level capture/trigger signals specified as parameters; up to 15 signals can be captured in parallel. An additional parameter *sizeSeqbuf* sets the size of the sequence buffer and thus the maximum duration of the trace. During acquisition, compression of clock cycles with no signal changes allows for efficient use of the corresponding vendor-agnostic on-FPGA RAM block.
 

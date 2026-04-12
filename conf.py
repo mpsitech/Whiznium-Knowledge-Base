@@ -17,7 +17,6 @@ extensions = ['myst_parser', 'sphinx_rtd_theme']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', '_staging', 'Thumbs.db', '.DS_Store',
-										'KB5.md',
 										'KB10.md', 'KB11.md', 'KB12.md', 'KB13.md', 'KB14.md', 'KB15.md', 'KB16.md', 'KB17.md', 'KB18.md', 'KB19.md',
 										'KB21.md']
 
