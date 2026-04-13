@@ -106,7 +106,7 @@
 <img src="KB20/image5.png" alt="image5.png" height="1336">
 <p><em>Figure 4b: typical multi-threading log entries (part 2/2)</em></p>
 <p><b><u>Extra: database-backed monitoring</u></b></p>
-<p>As an experimental feature, event logging to a SQL database is available. The corresponding relational database, as specified in [2] and shown in parts in Figures 5a-b, is well-suited to mirror the relations between job tree objects such as jobs and call listeners. It also allows to store clustering information of events that are mutually related. Database-backed monitoring is declared at the time of version stepping, by adding <em>dbsmon</em> to the version options (ixWOption) in the project’s <em>IexWznmPrj</em> model file. The make files are then automatically updated to link the daemon executable to the <em>libdbswzem</em> database access library.</p>
+<p>As an experimental feature, event logging to a SQL database is available. The corresponding relational database, as specified in [2] and shown in parts in Figures 5a-b, is well-suited to mirror the relations between job tree objects such as jobs and call listeners. It also allows to store clustering information of events that are mutually related. Database-backed monitoring is declared at the time of WhizniumSBE version iteration, by adding <em>dbsmon</em> to the version options (ixWOption) in the project’s <em>IexWznmPrj</em> model file. The make files are then automatically updated to link the daemon executable to the <em>libdbswzem</em> database access library.</p>
 <img src="KB20/image6.png" alt="image6.png" height="483">
 <p><em>Figure 5a: types of information gathered into SQL database tables during database-backed monitoring</em></p>
 <img src="KB20/image7.png" alt="image7.png" height="1180">
