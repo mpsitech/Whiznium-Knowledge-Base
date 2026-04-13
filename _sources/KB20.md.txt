@@ -60,7 +60,7 @@ Figures 4a-b show a typical scenario for the CV demonstrator with numerous threa
 
 <b><u>Extra: database-backed monitoring</u></b>
 
-As an experimental feature, event logging to a SQL database is available. The corresponding relational database, as specified in \[2\] and shown in parts in Figures 5a-b, is well-suited to mirror the relations between job tree objects such as jobs and call listeners. It also allows to store clustering information of events that are mutually related. Database-backed monitoring is declared at the time of version stepping, by adding *dbsmon* to the version options (ixWOption) in the project's *IexWznmPrj* model file. The make files are then automatically updated to link the daemon executable to the *libdbswzem* database access library.
+As an experimental feature, event logging to a SQL database is available. The corresponding relational database, as specified in \[2\] and shown in parts in Figures 5a-b, is well-suited to mirror the relations between job tree objects such as jobs and call listeners. It also allows to store clustering information of events that are mutually related. Database-backed monitoring is declared at the time of WhizniumSBE version iteration, by adding *dbsmon* to the version options (ixWOption) in the project's *IexWznmPrj* model file. The make files are then automatically updated to link the daemon executable to the *libdbswzem* database access library.
 
 
 <img src="KB20/image6.png" alt="image6.png" height="483">
