@@ -87,7 +87,7 @@ The resulting resource utilization is shown in Figure 3.
 
 *Figure 3: Resource utilization*
 
-<b><u>PetaLinux (Yocto) Workflow</u></b>
+<b><u>PetaLinux (Yocto) workflow</u></b>
 
 A standard PetaLinux 2024.2 workflow is used to first create the Linux boot and root file system artefacts and then the SDK, inside of which the CV demonstrator's WhizniumSBE project is compiled. Full instructions are not given here but indications on how this workflow is accomplished can be found here <https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/setup_peta.md>. The required subfolder for the PetaLinux / Yocto build is available online: <a href="https://content.mpsitech.cloud/projects/zudvk_wzsk_v1.2.16_project_spec.tgz" target="_blank">zudvk_wzsk_v1.2.16_project_spec.tgz</a>. It contains the relevant out-of-tree device drivers as well as the device tree.
 

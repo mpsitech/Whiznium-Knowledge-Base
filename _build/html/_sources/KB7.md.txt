@@ -57,7 +57,7 @@ cd /root/whiznium/bin/wzskcmbd
 respectively. After the daemon is started, its web UI can be reached at http://192.168.178.21:13100, with wzskuser / asdf1234 being the default credentials.
 
 
-<b><u>VSP Core Efinity Workflow</u></b>
+<b><u>VSP core Efinity workflow</u></b>
 
 Efinity 2025.1 has been used to run the RTL workflows from code to bitstream. The project for the Ti180 dev kit vsp_core ("video signal processing core") is avalilable online: <a href="https://content.mpsitech.cloud/projects/titdvk_vsp_core_v1.2.15.tgz" target="_blank">titdvk_vsp_core_v1.2.15.tgz</a>.
 
@@ -74,7 +74,7 @@ Key aspects of this variant's implementation include:
 - Hostif.vhd: the PS-PL AXI-4 Lite interconnect is 32 bits wide which is also the bus width for all connected buffers to be read from the host.
 
 
-<b><u>Top-level Efinity Workflow</u></b>
+<b><u>Top-level Efinity workflow</u></b>
 
 The top-level design is a heavily modified version of a special Efinix Ti180 dev kit out-of-the-box design [3] which makes the triple-speed Ethernet available to use from within Linux (it is provided by Efinix on request). The instantiation and wiring of vsp_core is achieved in its top-level Verilog file _top_ti180.v_. The full Efinity project is available for download: <a href="https://content.mpsitech.cloud/projects/titdvk_ti180-tsemac-linux_v1.2.15.tgz" target="_blank">titdvk_ti180-tsemac-linux_v1.2.15.tgz</a>.
 
@@ -84,7 +84,7 @@ The resulting resource utilization is shown in Figure 2.
 
 *Figure 2: Resource utilization*
 
-<b><u>Buildroot Workflow</u></b>
+<b><u>Buildroot workflow</u></b>
 
 A standard Buildroot 2021.1 workflow is used to first create the Linux boot and root file system artefacts and then the SDK, inside of which the CV demonstrator's WhizniumSBE project is compiled. Full instructions are not given here but can be obtained from various online sources. The required out-of-tree component for the Buildroot build, modified from [2], is available online: <a href="https://content.mpsitech.cloud/projects/titdvk_wzsk_v1.2.16_br2-efinix-ext-ethernet.tgz" target="_blank">titdvk_wzsk_v1.2.16_br2-efinix-ext-ethernet.tgz</a>. It contains the relevant out-of-tree device drivers as well as the device tree.
 
