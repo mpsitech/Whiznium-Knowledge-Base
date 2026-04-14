@@ -1,7 +1,7 @@
 AMD MPSoC variant (KB6)
 =======================
 
-*Published: official date pending*
+*Published: April 14, 2026*
 
 *Highlights the platform-specifics and build instructions for Avnet\'s ZUBoard.*
 
@@ -9,16 +9,45 @@ AMD MPSoC variant (KB6)
 
 <b><u>Overview</u></b>
 
+The ZUBoard, featuring the AMD's lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (\< USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.
+
 <img src="KB6/setup_low.jpg" alt="setup_low.jpg" height="600">
 
-*Figure 1: Hardware setup in action*
+*Figure 1: CV demonstrator based on ZUBoard in action*
+
+Parts specifically for this variant and provided with the delivery, include:
+
+- the Syzcam2 adapter PCB bringing the IMX335 camera module's 4+1 MIPI lanes routed as differential pairs, and its I2C, to a SYZYGY Transceiver connector
+
+- the Syzpmod2 adapter PCB which translates 2x8 GPIO's from PMOD to SYZYGY Standard
+
+- the Skpph2 PCB with populated PMOD connectors, which drives the CV demonstrator's stepper motor and line lasers from its own power supply
+
+- a USB-C power supply for the ZUBoard
+
+- a 12 V / 2 A power supply for Skpph2 with 5.5/2.5 mm barrel connector
+
+- a micro USB cable to access the MPSoC's serial console
+
 
 <b><u>Quick Start</u></b>
 
+The hardware setup needs to be established as depicted above, with the boot mode switches set to 0101 and J1 in the depicted 1.2 V position. A ready-to-use 16 GB microSD card image can be obtained and flashed using the commands
+
 ```
 wget https://content.mpsitech.cloud/artefacts/zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz
-sudo gunzip -c zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | sudo dd of=/dev/sda bs=64K
+sudo gunzip -c zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | dd of=/dev/sda bs=64K
 ```
+
+With the microSD card inserted into ZUBoard slot, and all power supplies connected, SW7 initiates the system boot into Linux. This should be accompanied by the D4 RGB LED pulsating. The image is configured for DHCP such that SSH into the board is possible. To start the daemon, run
+
+```
+cd /home/root/whiznium/bin/wzskcmbd
+./Wzskcmbd
+```
+
+after which the web UI can be reached at http://192.168.178.99:13100, where 192.168.178.99 is the assumed IP address attributed by DHCP.
+
 
 <b><u>VSP Core Vivado Workflow</u></b>
 
@@ -36,14 +65,14 @@ sudo gunzip -c zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | sudo dd of=/dev/
 
 <a href="https://content.mpsitech.cloud/projects/zudvk_wzsk_v1.2.16_project_spec.tgz" target="_blank">zudvk_wzsk_v1.2.16_project_spec.tgz</a>
 
+<b><u>Gateware and firmware specifics</u></b>
+
+
 
 <b><u>OLD FROM HERE</u></b>
 
-The ZUBoard, featuring the AMD's lowest density 1CG Zynq UltraScale+ MPSoC, is a popular choice for prototyping FPGA-SoC designs. At relatively low cost (\< USD 200), it provides high-speed access to custom peripherals via its SYZYGY connectors, as well as all standard Single-Board Computer (SBC) outlets, such as Ethernet and a microSD card slot.
 
-Syzcam2 adapter PCB for 4+1 MIPI lanes routed as differential pairs, level shifters for I2C
 
-Syzpmod2 adapter PCB for 2x8 GPIO's ... connecting to skpph2 with power supply to the stepper motor only, the ZUBoard is powered via USB-C
 
 Quick start
 
@@ -57,7 +86,7 @@ dd if=xxx.wic of=/dev/sda bs=4M
 
 Where /dev/sda is to be replaced with the path to which the microSD card is mounted.
 
-The full hardware assembly is depicted in Figure xx. A standard 12 V power supply with 5.5/2.5 mm barrel connector supplies skpph2 and a USB-C supply powers the ZUBoard. Make sure that the boot mode switches are set to 0101 and that J1 is in the depicted 1.2 V Vio position.
+The full hardware assembly is depicted in Figure xx. A standard 12 V power supply with 5.5/2.5 mm barrel connector supplies skpph2 and a USB-C supply powers the ZUBoard. 
 
 Upon pressing the button, the system will boot with output shown on the serial console (settings 115200N1), the default login is root/root. No DHCP is configured, an IP address can be set using
 
