@@ -26,9 +26,9 @@ sys: system integration across the Embedded Full Stack<br>
 |    |x   |x   |   |x  |KB2 Image Decimation for Preview|2026-04-06|vertical integration from RTL level across Linux to web UI|
 |    |x   |x   |   |   |KB3 HDR Image Generation DMA|2026-04-06|inclusion of external memory and platform-specific implications|
 |x   |    |x   |x  |   |KB4 Vendor-Agnostic Design Probing|2026-04-08|use of templates for signal-level debug outside of vendor IDE's|
-|x   |    |x   |   |   |KB5 Mastering the Job Tree|2026-04-12|key concepts of the run-time job hierarchy including calls and dispatches|
-|    |    |x   |x  |   |KB6 AMD MPSoC Variant|2026-04-13|platform-specifics and build instructions for Avnet's ZUBoard|
-|    |    |x   |x  |   |KB7 Efinix Titanium Variant|2026-04-13|platform-specifics and build instructions for Efinix's Ti180 dev kit|
+|x   |    |x   |   |   |KB5 Mastering the Job Tree|2026-04-13|key concepts of the run-time job hierarchy including calls and dispatches|
+|    |    |x   |x  |   |KB6 AMD MPSoC Variant|2026-04-14|platform-specifics and build instructions for Avnet's ZUBoard|
+|    |    |x   |x  |   |KB7 Efinix Titanium Variant|2026-04-14|platform-specifics and build instructions for Efinix's Ti180 dev kit|
 |    |    |x   |x  |   |<div style="color:lightgray">KB8 Microchip PolarFire SoC Variant</div>|release pipeline #2|platform-specifics and build instructions for Microchip's MPFS Disco kit|
 |    |x   |x   |   |   |<div style="color:lightgray">KB9 Pipelined Corner Detection Algorithm</div>|release pipeline #1|pipelined and parallel execition, a key FPGA strength|
 |x   |    |    |   |x  |<div style="color:lightgray">KB10 Web UI Customization</div>|TBD|integration of non-standard UI features into auto-generated context|

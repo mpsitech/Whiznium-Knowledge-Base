@@ -40,4 +40,4 @@ Welcome to the Whiznium Knowledge Base
 Release
 =======
 
-Last update: April 13, 2026.
+Last update: April 14, 2026.
