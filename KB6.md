@@ -39,7 +39,7 @@ wget https://content.mpsitech.cloud/artefacts/zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD
 sudo gunzip -c zudvk_wzsk_v1.2.16_wskd_v1.2.15_SD_16GB.img.gz | dd of=/dev/sda bs=64K
 ```
 
-With the microSD card inserted into ZUBoard's slot, and both power supplies connected, SW7 initiates the system boot into Linux. A successful boot is accompanied by RGB LED D4 pulsating. The image is configured for DHCP such that SSH into the board is possible. The command-line terminal for low-level RTL access and the CV demonstrator daemon are started with
+With the microSD card inserted into the ZUBoard's slot, and both power supplies connected, SW7 initiates the system boot into Linux. A successful boot is accompanied by RGB LED D4 pulsating. The image is configured for DHCP such that SSH into the board is possible. The command-line terminal for low-level RTL access and the CV demonstrator daemon are started with
 
 ```
 cd /home/root/whiznium/bin/wskdterm
@@ -62,13 +62,13 @@ Vivado 2024.2 has been used to run the RTL workflows from code to bitstream. The
 
 Key aspects of this variant's implementation include:
 
-- Camif.vhd instantiates the AMD MIPI CSI-2 Receiver Subsystem (cf. PG232) configured to 4+1 MIPI lanes with 1188 Mbps. This allows the IMX335 to deliver its native resolution of 2592 x 1944 pixels at 30 fps. Direct application of 200 MHz master clock as restored pixel data clock with the IP core's AXI-4 Stream output filtered to only consider the RAW12 data type. Data of two adjacent pixels (24-bit words) is delivered towards videoin on each clock cycle.
+- Camif.vhd instantiates the AMD MIPI CSI-2 Receiver Subsystem (cf. AMD PG232) configured to 4+1 MIPI lanes with 1188 Mbps. This allows the IMX335 camera module to deliver its native resolution of 2592 x 1944 pixels at 30 fps. Direct application of 200 MHz master clock as restored pixel data clock with the IP core's AXI-4 Stream output filtered to only consider the RAW12 data type. Data of two adjacent pixels (24-bit words) is delivered towards videoin on each clock cycle.
 
 - Videoin.vhd delivers one RGB/grayscale value every other clock cycle at 1296 x 972 resolution.
 
-- Decim.vhd features a 38 kB dual-port BRAM which results in 6 x 6 binning for grayscale and 10 x 10 binning for RGB.
+- Decim.vhd features a 38 kB dual-port BRAM which results in 6x6 binning for grayscale and 10x10 binning for RGB preview images.
 
-- Hdreng.vhd / Ddrif.vhd: using fMemclk = 250 MHz on the 128-bit AXI-4 interconnect allows for a theoretical bandwidth of 4 GB/s; load and store operation is handled via 128-bit:64-bit dual-port BRAM's serving as CDC interface as well.
+- Hdreng.vhd / Ddrif.vhd: using fMemclk = 325 MHz on the 128-bit AXI-4 interconnect allows for a theoretical bandwidth of 5.2 GB/s; load and store operation is handled via 128-bit:64-bit dual-port BRAM's serving as CDC interface as well.
 
 - Hostif.vhd: the PS-PL AXI-4 Lite interconnect is 64 bits wide which is also the bus width for all connected buffers to be read from the host.
 
@@ -89,7 +89,7 @@ The resulting resource utilization is shown in Figure 3.
 
 <b><u>PetaLinux (Yocto) Workflow</u></b>
 
-A standard PetaLinux 2024.2 workflow is used to first create the Linux boot and root file system artefacts and then the SDK, inside of which the CV demonstrator's WhizniumSBE project is compiled. Full instructions are not given here but indications on how this workflow is accomplished can be found here <https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/setup_peta.md>. The required subfolder for the PetaLinux / Yocto build, containing the project specifics, is available online: <a href="https://content.mpsitech.cloud/projects/zudvk_wzsk_v1.2.16_project_spec.tgz" target="_blank">zudvk_wzsk_v1.2.16_project_spec.tgz</a>. It contains the relevant out-of-tree device drivers as well as the device tree.
+A standard PetaLinux 2024.2 workflow is used to first create the Linux boot and root file system artefacts and then the SDK, inside of which the CV demonstrator's WhizniumSBE project is compiled. Full instructions are not given here but indications on how this workflow is accomplished can be found here <https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/setup_peta.md>. The required subfolder for the PetaLinux / Yocto build is available online: <a href="https://content.mpsitech.cloud/projects/zudvk_wzsk_v1.2.16_project_spec.tgz" target="_blank">zudvk_wzsk_v1.2.16_project_spec.tgz</a>. It contains the relevant out-of-tree device drivers as well as the device tree.
 
 
 [1] Tria Technologies ZUBoard 1CG <https://www.tria-technologies.com/product/zuboard-1cg>, retrieved on April 14, 2026
