@@ -90,23 +90,51 @@
 <p><em>Figure 1: CV demonstrator based on Efinix Ti180 dev kit in action</em></p>
 <p>Parts specific to this variant ans provided with the delivery, include:</p>
 <ul class="simple">
-<li><p>Syzcam2 adapter PCB for 4+1 MIPI lanes routed as differential pairs, level shifters for I2C</p></li>
-<li><p>Syzpmod2 adapter PCB for 2x8 GPIO’s … connecting to skpph2 with power supply to the stepper motor only, the ZUBoard is powered via USB-C</p></li>
+<li><p>the Qtepmod2 adapter PCB which translates 2x8 GPIO’s from PMOD to the custom Samtec QTE connector found on the Efinix breakout board.</p></li>
+<li><p>the Skpph2 PCB with populated PMOD connectors, which drives the CV demonstrator’s stepper motor and line lasers from its own power supply, which is also forwarded via cable to the dev kit.</p></li>
+<li><p>a 12 V / 2 A power supply for Skpph2 with 5.5/2.5 mm barrel connector.</p></li>
+<li><p>a USB-C cable to access the JTAG chain and the Sapphire SoC’s serial console</p></li>
 </ul>
-<p><b><u>Quick Start</u></b></p>
-<p>The hardware setup needs to be established as depicted above. The first-stage boot loaded and FPGA configuration need to be flashed into a dedicated … . A ready-to-use 16 GB microSD card image can be obtained and flashed using the commands</p>
+<p><b><u>Quick start</u></b></p>
+<p>The hardware setup needs to be established as depicted above. First-stage boot loader and FPGA configuration are to be programmed into the dev kit’s dedicated SPI NOR Flash memory which is accomplished through the Efinity Programmer tool. Two binary files are reuqired for this, the first representing the project bitstream and the second (provided by Efinix as part of [2]) required to make the JTAG programming work. Both are available for download: <a href="https://content.mpsitech.cloud/artefacts/titdvk_wzsk_v1.2.16_wskd_v1.2.15_ti180-tsemac-linux.hex" target="_blank">titdvk_wzsk_v1.2.16_wskd_v1.2.15_ti180-tsemac-linux.hex</a> and
+<a href="https://content.mpsitech.cloud/artefacts/titdvk_wzsk_v1.2.16_wskd_v1.2.15_jtag_spi_flash_loader_dual.bit" target="_blank">titdvk_wzsk_v1.2.16_wskd_v1.2.15_jtag_spi_flash_loader_dual.bit</a>.</p>
+<p>A ready-to-use 16 GB microSD card image can be obtained and flashed using the commands</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">content</span><span class="o">.</span><span class="n">mpsitech</span><span class="o">.</span><span class="n">cloud</span><span class="o">/</span><span class="n">artefacts</span><span class="o">/</span><span class="n">titdvk_wzsk_v1</span><span class="mf">.2.16</span><span class="n">_wskd_v1</span><span class="mf">.2.15</span><span class="n">_SD_16GB</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">gz</span>
-<span class="n">sudo</span> <span class="n">gunzip</span> <span class="o">-</span><span class="n">c</span> <span class="n">titdvk_wzsk_v1</span><span class="mf">.2.16</span><span class="n">_wskd_v1</span><span class="mf">.2.15</span><span class="n">_SD_16GB</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">dd</span> <span class="n">of</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda</span> <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="n">K</span>
+<span class="n">sudo</span> <span class="n">gunzip</span> <span class="o">-</span><span class="n">c</span> <span class="n">titdvk_wzsk_v1</span><span class="mf">.2.16</span><span class="n">_wskd_v1</span><span class="mf">.2.15</span><span class="n">_SD_16GB</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">dd</span> <span class="n">of</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda</span> <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="n">K</span>
 </pre></div>
 </div>
-<p><a href="https://content.mpsitech.cloud/artefacts/titdvk_wzsk_v1.2.16_wskd_v1.2.15_ti180-tsemac-linux.hex" target="_blank">titdvk_wzsk_v1.2.16_wskd_v1.2.15_ti180-tsemac-linux.hex</a>,
-<a href="https://content.mpsitech.cloud/artefacts/titdvk_wzsk_v1.2.16_wskd_v1.2.15_jtag_spi_flash_loader_dual.bit" target="_blank">titdvk_wzsk_v1.2.16_wskd_v1.2.15_jtag_spi_flash_loader_dual.bit</a></p>
+<p>With the microSD card inserted into dev kit’s slot, the power supply connected and PSW1 in the “on” position, SW2 initiates the system boot into Linux. A successful boot is accompanied by LED3 pulsating. The image is not configured for DHCP such that in a serial console (credentials root / root) the <em>./init.sh</em> command needs to be executed. It probes out-of-tree kernel modules and establishes the system at 192.168.178.21, which can of course be modified in the script as needed.</p>
+<p>After this step, SSH into the board is possible. The command-line terminal for low-level RTL access and the CV demonstrator daemon are started with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">whiznium</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">wskdterm</span>
+<span class="o">./</span><span class="n">Wskdterm</span> <span class="n">tivsp</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">dbeaxilite0</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">whiznium</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">wzskcmbd</span>
+<span class="o">./</span><span class="n">Wzskcmbd</span>
+</pre></div>
+</div>
+<p>respectively. After the daemon is started, its web UI can be reached at http://192.168.178.21:13100, with wzskuser / asdf1234 being the default credentials.</p>
 <p><b><u>VSP Core Efinity Workflow</u></b></p>
-<p><a href="https://content.mpsitech.cloud/projects/titdvk_vsp_core_v1.2.15.tgz" target="_blank">titdvk_vsp_core_v1.2.15.tgz</a></p>
+<p>Efinity 2025.1 has been used to run the RTL workflows from code to bitstream. The project for the Ti180 dev kit vsp_core (“video signal processing core”) is avalilable online: <a href="https://content.mpsitech.cloud/projects/titdvk_vsp_core_v1.2.15.tgz" target="_blank">titdvk_vsp_core_v1.2.15.tgz</a>.</p>
+<p>Key aspects of this variant’s implementation include:</p>
+<ul class="simple">
+<li><p>Camif.vhd embeds the Efinix MIPI 2.5G CSI-2 RX Controller configured to 4+1 MIPI lanes with 1188 Mbps. This allows the IMX335 camera module to deliver its native resolution of 2592 x 1944 pixels at 30 fps. In a first stage, camif synchronizes the controller’s output clock and data to the design’s master clock of 200 MHz, filtering for RAW12 data. Data of two adjacent pixels (24-bit words) is delivered towards videoin on each clock cycle.</p></li>
+<li><p>Videoin.vhd delivers one RGB/grayscale value every other clock cycle at 1296 x 972 resolution.</p></li>
+<li><p>Decim.vhd features a 32 kB dual-port BRAM which results in 7 x 7 binning for grayscale and 11 x 11 binning for RGB preview images.</p></li>
+<li><p>Hdreng.vhd / Ddrif.vhd: using fMemclk = 250 MHz on the “extra-wide” 512-bit AXI-4 interconnect allows for a theoretical bandwidth of 16 GB/s which is however not matched by the physical design in practice; load and store operation is handled via 512-bit:64-bit dual-port BRAM’s serving as CDC interface as well.</p></li>
+<li><p>Hostif.vhd: the PS-PL AXI-4 Lite interconnect is 32 bits wide which is also the bus width for all connected buffers to be read from the host.</p></li>
+</ul>
 <p><b><u>Top-level Efinity Workflow</u></b></p>
-<p><a href="https://content.mpsitech.cloud/projects/titdvk_ti180-tsemac-linux_v1.2.15.tgz" target="_blank">titdvk_ti180-tsemac-linux_v1.2.15.tgz</a></p>
+<p>The top-level design is a heavily modified version of a special Efinix Ti180 dev kit out-of-the-box design [3] which makes the triple-speed Ethernet available to use from within Linux (it is provided by Efinix on request). The instantiation and wiring of vsp_core is achieved in its top-level Verilog file <em>top_ti180.v</em>. The full Efinity project is available for download: <a href="https://content.mpsitech.cloud/projects/titdvk_ti180-tsemac-linux_v1.2.15.tgz" target="_blank">titdvk_ti180-tsemac-linux_v1.2.15.tgz</a>.</p>
+<p>The resulting resource utilization is shown in Figure 2.</p>
+<img src="KB7/resutil.png" alt="resutil.png" height="500">
+<p><em>Figure 2: Resource utilization</em></p>
 <p><b><u>Buildroot Workflow</u></b></p>
-<p><a href="https://content.mpsitech.cloud/projects/titdvk_wzsk_v1.2.16_br2-efinix-ext-ethernet.tgz" target="_blank">titdvk_wzsk_v1.2.16_br2-efinix-ext-ethernet.tgz</a></p>
+<p>A standard Buildroot 2021.1 workflow is used to first create the Linux boot and root file system artefacts and then the SDK, inside of which the CV demonstrator’s WhizniumSBE project is compiled. Full instructions are not given here but can be obtained from various online sources. The required out-of-tree component for the Buildroot build, modified from [2], is available online: <a href="https://content.mpsitech.cloud/projects/titdvk_wzsk_v1.2.16_br2-efinix-ext-ethernet.tgz" target="_blank">titdvk_wzsk_v1.2.16_br2-efinix-ext-ethernet.tgz</a>. It contains the relevant out-of-tree device drivers as well as the device tree.</p>
+<p>[1] Efinix Titanium Ti180 M484 Development Kit <a class="reference external" href="https://www.efinixinc.com/products-devkits-titaniumti180m484.html">https://www.efinixinc.com/products-devkits-titaniumti180m484.html</a>, retrieved on April 14, 2026</p>
+<p>[2] Efinix Buildroot 2021.1 <a class="reference external" href="https://github.com/Efinix-Inc/br2-efinix">https://github.com/Efinix-Inc/br2-efinix</a>, retrieved on April 14, 2026</p>
+<p>[3] Efinix Ti180 Development Kit Design <a class="reference external" href="https://www.efinixinc.com/support/ed/ti180j484-demo-design.php">https://www.efinixinc.com/support/ed/ti180j484-demo-design.php</a>, retrieved on April 14, 2026</p>
 </section>
 
 
